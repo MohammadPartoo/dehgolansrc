@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>پژوهش سرای دانش‌آموزی رازی شهرستان دهگلان | کانون خلاقیت و پژوهش</title>
+<!-- ================= SEO ================= -->
+<meta name="description" content="پايگاه اطلاع‌رسانی و سامانه ثبت‌نام پژوهش سرای دانش‌آموزی رازی شهرستان دهگلان (استان کردستان). معرفی انجمن‌های علمی، کارگاه‌های تخصصی رباتیک، زیست‌فناوری، نجوم، نانو و ثبت‌نام دانش‌آموزان.">
+<meta name="keywords" content="پژوهش سرای رازی دهگلان, شهرستان دهگلان, ثبت نام پژوهش سرا, جشنواره خوارزمی, انجمن علمی دانش آموزی, رباتیک, نانو, سلول های بنیادی, نجوم">
+<meta name="author" content="مدیریت آموزش و پرورش شهرستان دهگلان — پژوهش سرای دانش‌آموزی رازی">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0d6e6e">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+
+<style>
+  :root {
+    --navy: #0d6e6e;
+    --navy-dark: #073f3f;
+    --navy-light: #169393;
+    --gold: #c9a24b;
+    --gold-light: #f3e2b3;
+    --cream: #faf6ee;
+    --sand: #f1e8d8;
+    --text: #2a2f3a;
+    --white: #ffffff;
+    --shadow: 0 10px 30px rgba(13, 110, 110, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    font-family: "Vazirmatn", "Iranian Sans", Tahoma, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+
+  /* --- Scrollbar --- */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--sand); }
+  ::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+  #scrollbar-progress {
+    position: fixed; top: 0; right: 0; height: 4px;
+    background: linear-gradient(to left, var(--gold), #ffde82);
+    z-index: 99999; transition: width 0.1s; width: 0%;
+  }
+
+  /* ---------- Header & Nav ---------- */
+  header {
+    position: sticky; top: 0; z-index: 10000;
+    background: linear-gradient(135deg, var(--navy), var(--navy-dark));
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  }
+  .nav-container {
+    max-width: 1250px; margin: 0 auto; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+  .brand-logo {
+    width: 48px; height: 48px; background: var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; font-weight: bold; color: var(--navy-dark);
+    box-shadow: 0 0 15px rgba(201,162,75,0.5);
+  }
+  .brand-text h1 { font-size: 18px; font-weight: 800; color: #fff; line-height: 1.3; }
+  .brand-text span { font-size: 12px; color: var(--gold-light); display: block; }
+
+  .menu-toggle {
+    display: none; background: none; border: 2px solid var(--gold); color: #fff;
+    padding: 6px 12px; border-radius: 8px; font-size: 22px; cursor: pointer;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 18px; list-style: none;
+  }
+  .nav-links a {
+    color: #e2f0f0; text-decoration: none; font-size: 14.5px; font-weight: 600;
+    transition: 0.3s; padding: 6px 14px; border-radius: 20px;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--navy-dark); background: var(--gold);
+  }
+  .btn-register-nav {
+    background: var(--gold) !important; color: var(--navy-dark) !important;
+    font-weight: 800 !important; box-shadow: 0 0 12px rgba(201,162,75,0.5);
+  }
+
+  /* ---------- Hero Section ---------- */
+  .hero {
+    position: relative; min-height: 88vh; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(7,63,63,0.92), rgba(13,110,110,0.88)), url('img/hero.jpg') center/cover;
+    color: #fff; text-align: center; padding: 60px 20px; overflow: hidden;
+  }
+  #particles-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+  .hero-content { position: relative; z-index: 2; max-width: 950px; }
+  .hero-badge {
+    display: inline-block; background: rgba(201,162,75,0.25); border: 1px solid var(--gold);
+    color: var(--gold-light); padding: 6px 20px; border-radius: 30px; font-size: 14px;
+    font-weight: 700; margin-bottom: 22px; backdrop-filter: blur(5px);
+  }
+  .hero h2 {
+    font-size: 40px; font-weight: 900; line-height: 1.4; margin-bottom: 20px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  }
+  .hero h2 em { color: var(--gold); font-style: normal; }
+  .hero p { font-size: 17.5px; color: #d6ebeb; max-width: 800px; margin: 0 auto 35px; line-height: 1.9; }
+  .hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), #b8903a); color: var(--navy-dark);
+    padding: 14px 34px; border-radius: 30px; font-size: 16px; font-weight: 800;
+    text-decoration: none; transition: 0.3s; box-shadow: 0 6px 20px rgba(201,162,75,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(201,162,75,0.6); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.12); color: #fff; border: 2px solid rgba(255,255,255,0.4);
+    padding: 14px 30px; border-radius: 30px; font-size: 16px; font-weight: 700;
+    text-decoration: none; transition: 0.3s;
+  }
+  .btn-secondary:hover { background: #fff; color: var(--navy); }
+
+  /* Stats Counter Bar */
+  .stats-bar {
+    max-width: 1100px; margin: -50px auto 40px; position: relative; z-index: 10;
+    background: #fff; border-radius: 20px; box-shadow: 0 15px 40px rgba(13,110,110,0.12);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: 25px 20px; border: 1px solid #eadfc7;
+  }
+  .stat-item { text-align: center; padding: 10px; border-left: 1px dashed #e0d5bd; }
+  .stat-item:last-child { border-left: none; }
+  .stat-num { font-size: 34px; font-weight: 900; color: var(--navy); display: block; }
+  .stat-label { font-size: 14px; font-weight: 700; color: #666; margin-top: 4px; }
+
+  /* ---------- Section Common ---------- */
+  section { padding: 75px 20px; max-width: 1250px; margin: 0 auto; }
+  .sec-header { text-align: center; margin-bottom: 50px; }
+  .sec-header h3 {
+    font-size: 28px; color: var(--navy); font-weight: 900; display: inline-block;
+    position: relative; padding-bottom: 15px;
+  }
+  .sec-header h3::after {
+    content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 70px; height: 4px; background: var(--gold); border-radius: 4px;
+  }
+  .sec-header p { font-size: 16px; color: #666; margin-top: 12px; }
+
+  /* ---------- Registration Section (NEW) ---------- */
+  .reg-section {
+    background: linear-gradient(135deg, #0d6e6e, #063c3c); color: #fff;
+    padding: 80px 20px; position: relative; overflow: hidden;
+  }
+  .reg-container {
+    max-width: 850px; margin: 0 auto; background: #fff; color: var(--text);
+    border-radius: 24px; padding: 40px 35px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    border: 3px solid var(--gold); position: relative; z-index: 2;
+  }
+  .reg-container h3 { font-size: 24px; color: var(--navy); margin-bottom: 10px; font-weight: 900; text-align: center; }
+  .reg-container p.sub { text-align: center; color: #666; font-size: 14.5px; margin-bottom: 30px; }
+  
+  .reg-form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .reg-form .full { grid-column: 1/-1; }
+  .form-group { display: flex; flex-direction: column; }
+  .form-group label { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .form-group input, .form-group select {
+    width: 100%; padding: 12px 16px; border: 1.5px solid #d8cdb4; border-radius: 12px;
+    font-size: 14.5px; background: #fffdf8; transition: 0.3s; font-family: inherit; color: var(--text);
+  }
+  .form-group input:focus, .form-group select:focus {
+    outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(201,162,75,0.2); background: #fff;
+  }
+  
+  /* Conditional Major Box */
+  #majorBox { display: none; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .btn-submit-reg {
+    background: linear-gradient(135deg, var(--navy), #125e5e); color: #fff; border: none;
+    padding: 15px 30px; border-radius: 30px; font-size: 16px; font-weight: 800;
+    cursor: pointer; transition: 0.3s; width: 100%; box-shadow: 0 8px 20px rgba(13,110,110,0.3);
+  }
+  .btn-submit-reg:hover {
+    background: linear-gradient(135deg, var(--gold), #b8903a); color: var(--navy-dark);
+    box-shadow: 0 12px 25px rgba(201,162,75,0.4); transform: translateY(-2px);
+  }
+  .reg-success {
+    display: none; background: #e8f5e9; border: 2px solid #4caf50; color: #1b5e20;
+    padding: 20px; border-radius: 16px; text-align: center; margin-top: 20px; font-weight: 700;
+  }
+
+  /* ---------- About Section ---------- */
+  .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .about-text h4 { font-size: 22px; color: var(--navy-dark); margin-bottom: 16px; font-weight: 800; }
+  .about-text p { font-size: 15.5px; color: #444; margin-bottom: 16px; text-align: justify; }
+  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+  .feature-box {
+    background: #fff; padding: 16px; border-radius: 14px; border: 1px solid #eadfc7;
+    display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+  .feature-icon {
+    width: 44px; height: 44px; background: #e6f3f3; color: var(--navy); border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
+  }
+  .feature-box b { font-size: 14px; color: var(--navy); display: block; }
+  .about-image { position: relative; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); border: 4px solid #fff; }
+  .about-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ---------- Associations Section ---------- */
+  .assoc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 24px; }
+  .assoc-card {
+    background: #fff; border-radius: 18px; border: 1px solid #eadfc7; padding: 25px 20px;
+    text-align: center; transition: 0.3s; position: relative; overflow: hidden;
+  }
+  .assoc-card::before {
+    content: ""; position: absolute; top: 0; right: 0; width: 100%; height: 5px;
+    background: var(--navy); transition: 0.3s;
+  }
+  .assoc-card:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(13,110,110,0.12); border-color: var(--gold); }
+  .assoc-card:hover::before { background: var(--gold); }
+  .assoc-icon {
+    width: 65px; height: 65px; background: #f0f7f7; color: var(--navy); border-radius: 50%;
+    margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; font-size: 30px;
+  }
+  .assoc-card h4 { font-size: 17.5px; color: var(--navy); margin-bottom: 10px; font-weight: 800; }
+  .assoc-card p { font-size: 13.5px; color: #666; margin-bottom: 18px; min-height: 52px; }
+  .btn-assoc {
+    background: #f4efdf; color: var(--navy-dark); border: none; padding: 8px 18px;
+    border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s;
+  }
+  .btn-assoc:hover { background: var(--navy); color: #fff; }
+
+  /* ---------- Labs Showcase ---------- */
+  .labs-section { background: #f4f0e6; padding: 75px 0; border-top: 1px solid #e3d8c1; border-bottom: 1px solid #e3d8c1; }
+  .labs-wrap { max-width: 1250px; margin: 0 auto; padding: 0 20px; }
+  .labs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 30px; }
+  .lab-card {
+    background: #fff; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow);
+    border: 1px solid #eadfc7; display: flex; flex-direction: column; transition: 0.3s;
+  }
+  .lab-card:hover { transform: translateY(-5px); }
+  .lab-img { height: 240px; position: relative; overflow: hidden; }
+  .lab-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+  .lab-card:hover .lab-img img { transform: scale(1.05); }
+  .lab-tag {
+    position: absolute; top: 15px; right: 15px; background: var(--gold); color: var(--navy-dark);
+    padding: 4px 14px; border-radius: 20px; font-size: 12.5px; font-weight: 800;
+  }
+  .lab-info { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+  .lab-info h4 { font-size: 19px; color: var(--navy); margin-bottom: 12px; font-weight: 800; }
+  .lab-info p { font-size: 14px; color: #555; margin-bottom: 20px; flex: 1; }
+  .lab-equip { display: flex; flex-wrap: wrap; gap: 8px; }
+  .lab-equip span {
+    background: #f0f5f5; color: var(--navy-dark); font-size: 12px; padding: 4px 10px; border-radius: 6px;
+  }
+
+  /* ---------- Dynamic E-learning & Content Section ---------- */
+  .content-section { background: #fff; border-radius: 24px; padding: 50px 30px; box-shadow: var(--shadow); border: 1px solid #eadfc7; margin: 40px auto; }
+  .filter-bar {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+    margin-bottom: 30px; border-bottom: 2px solid #f0e8d8; padding-bottom: 18px;
+  }
+  .tabs { display: flex; gap: 10px; flex-wrap: wrap; }
+  .tab-btn {
+    background: #f5f0e4; color: var(--navy); border: none; padding: 8px 18px;
+    border-radius: 20px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: 0.3s;
+  }
+  .tab-btn.active, .tab-btn:hover { background: var(--navy); color: #fff; }
+  .search-box { display: flex; align-items: center; background: #f8f6f0; border: 1.5px solid #d8cdb4; border-radius: 25px; padding: 4px 15px; width: 280px; }
+  .search-box input { border: none; background: transparent; padding: 6px; font-size: 13.5px; width: 100%; outline: none; font-family: inherit; }
+
+  .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+  .content-item {
+    background: #fdfcf9; border: 1px solid #e7ded0; border-radius: 14px; padding: 20px;
+    display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
+  }
+  .content-item:hover { border-color: var(--navy); box-shadow: 0 6px 18px rgba(0,0,0,0.05); }
+  .c-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .c-icon { width: 45px; height: 45px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .c-icon.link { background: #e3f2fd; color: #1565c0; }
+  .c-icon.pdf { background: #fbe9e7; color: #d84315; }
+  .c-icon.video { background: #e8f5e9; color: #2e7d32; }
+  .c-title { font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.5; }
+  .c-desc { font-size: 13px; color: #666; margin-bottom: 18px; }
+  .c-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    background: var(--navy); color: #fff; text-decoration: none; padding: 9px 16px;
+    border-radius: 10px; font-size: 13px; font-weight: 700; transition: 0.2s;
+  }
+  .c-btn:hover { background: var(--gold); color: var(--navy-dark); }
+
+  /* ---------- FAQ Accordion ---------- */
+  .faq-list { max-width: 850px; margin: 0 auto; }
+  .faq-item { background: #fff; border: 1px solid #eadfc7; border-radius: 14px; margin-bottom: 14px; overflow: hidden; }
+  .faq-q {
+    padding: 18px 22px; font-size: 15.5px; font-weight: 800; color: var(--navy);
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    background: #fff; transition: 0.2s;
+  }
+  .faq-q:hover { background: #faf6ee; }
+  .faq-q::after { content: "+"; font-size: 22px; font-weight: bold; color: var(--gold); transition: 0.3s; }
+  .faq-item.active .faq-q::after { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #fcfbf8; }
+  .faq-a p { padding: 18px 22px; font-size: 14px; color: #555; line-height: 1.9; border-top: 1px dashed #e8ded0; }
+
+  /* ---------- Video modal ---------- */
+  .vmodal{
+    position:fixed;inset:0;z-index:250000;
+    background:rgba(8,18,38,.92);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+    opacity:0;pointer-events:none;transition:opacity .3s;padding:20px;
+  }
+  .vmodal.open{opacity:1;pointer-events:auto;}
+  .vmodal .vbox{
+    width:min(94vw,900px);background:#000;border-radius:16px;
+    border:3px solid var(--gold);overflow:hidden;
+    box-shadow:0 24px 80px rgba(0,0,0,.6);
+    transform:scale(.94);transition:transform .3s;
+  }
+  .vmodal.open .vbox{transform:scale(1);}
+  .vmodal .vframe{position:relative;width:100%;aspect-ratio:16/9;background:#000;}
+  .vmodal .vframe iframe,.vmodal .vframe video{
+    position:absolute;inset:0;width:100%;height:100%;border:0;display:block;
+  }
+  .vmodal .vtitle{
+    color:var(--gold-light);font-size:16px;font-weight:700;margin-top:14px;text-align:center;
+    max-width:min(94vw,900px);
+  }
+  .vmodal .vclose{
+    position:absolute;top:16px;left:16px;width:44px;height:44px;border-radius:50%;
+    background:var(--gold);color:var(--navy-dark);border:none;font-size:22px;font-weight:900;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;z-index:2;
+  }
+  .vmodal .vclose:hover{background:var(--gold-light);transform:rotate(90deg);}
+  .vmodal .vhint{color:#8fa0c0;font-size:12px;margin-top:8px;}
+
+  /* ---------- Modal Popup ---------- */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); z-index: 100000; display: none;
+    align-items: center; justify-content: center; padding: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .modal-box {
+    background: #fff; border-radius: 20px; max-width: 560px; width: 100%;
+    padding: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    border: 2px solid var(--gold); animation: popModal 0.3s ease;
+  }
+  @keyframes popModal { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-close {
+    position: absolute; top: 15px; left: 15px; background: #eee; border: none;
+    width: 34px; height: 34px; border-radius: 50%; font-size: 18px; cursor: pointer;
+  }
+  .modal-box h3 { font-size: 20px; color: var(--navy); margin-bottom: 14px; }
+  .modal-box p { font-size: 14.5px; color: #444; margin-bottom: 20px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: linear-gradient(135deg, var(--navy-dark), #032222);
+    color: #fff; padding: 60px 20px 25px; border-top: 4px solid var(--gold);
+  }
+  .footer-grid {
+    max-width: 1250px; margin: 0 auto; display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr; gap: 40px; margin-bottom: 40px;
+  }
+  .footer-col h4 { font-size: 18px; color: var(--gold-light); margin-bottom: 18px; font-weight: 800; }
+  .footer-col p { font-size: 14px; color: #c8dede; line-height: 2; margin-bottom: 12px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { color: #c8dede; text-decoration: none; font-size: 14px; transition: 0.2s; }
+  .footer-links a:hover { color: var(--gold); padding-right: 6px; }
+  .footer-contact li { font-size: 14px; color: #c8dede; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .footer-bottom {
+    max-width: 1250px; margin: 0 auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center; font-size: 13px; color: #a1c2c2;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 950px) {
+    .menu-toggle { display: block; }
+    .nav-links {
+      position: fixed; top: 72px; right: -100%; width: 280px; height: calc(100vh - 72px);
+      background: var(--navy-dark); flex-direction: column; align-items: flex-start;
+      padding: 30px 20px; transition: 0.3s; box-shadow: -5px 0 20px rgba(0,0,0,0.4);
+    }
+    .nav-links.show { right: 0; }
+    .about-grid, .footer-grid, .reg-form { grid-template-columns: 1fr; }
+    .hero h2 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="scrollbar-progress"></div>
+
+<!-- ================= Header ================= -->
+<header>
+  <div class="nav-container">
+    <a href="#" class="brand">
+      <div class="brand-logo">🔬</div>
+      <div class="brand-text">
+        <h1>پژوهش سرای دانش‌آموزی رازی دهگلان</h1>
+        <span>مدیریت آموزش و پرورش شهرستان دهگلان</span>
+      </div>
+    </a>
+    <button class="menu-toggle" id="menuBtn" aria-label="منو">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="active">خانه</a></li>
+      <li><a href="#register" class="btn-register-nav">📝 ثبت‌نام در پژوهش‌سرا</a></li>
+      <li><a href="#about">معرفی پژوهش‌سرا</a></li>
+      <li><a href="#assocs">انجمن‌های علمی</a></li>
+      <li><a href="#labs">آزمایشگاه‌ها و امکانات</a></li>
+      <li><a href="#content-sec">آموزش مجازی و فعالیت‌ها</a></li>
+      <li><a href="#faq">پرسش‌های متداول</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ================= Hero Section ================= -->
+<div class="hero" id="home">
+  <canvas id="particles-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">🌿 قطب شکوفایی خلاقیت دانش‌آموزان شهرستان دهگلان</div>
+    <h2>پژوهش سرای دانش‌آموزی <em>رازی دهگلان</em><br>کانون تفکر، کاوشگری و نوآوری علمی</h2>
+    <p>محیطی مجهز و الهام‌بخش برای پرورش خلاقیت، انجام آزمایش‌های علمی پیشرفته، ساخت ربات و دست‌سازه‌ها، و هدایت پروژه‌های دانش‌آموزان در جشنواره‌های ملی خوارزمی و علمی-پژوهشی.</p>
+    <div class="hero-btns">
+      <a href="#register" class="btn-primary">📝 ثبت‌نام آنلاین دانش‌آموزان</a>
+      <a href="#assocs" class="btn-secondary">مشاهده انجمن‌های علمی</a>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num" data-val="8">۰</span>
+    <span class="stat-label">انجمن علمی - تخصصی فعال</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-val="4">۰</span>
+    <span class="stat-label">آزمایشگاه و کارگاه مجهز</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-val="650">۰</span>
+    <span class="stat-label">دانش‌آموز پژوهشگر عضو</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-val="25">۰</span>
+    <span class="stat-label">رتبه برتر استانی و کشوری</span>
+  </div>
+</div>
+
+<!-- ================= Registration Section (NEW) ================= -->
+<div class="reg-section" id="register">
+  <div class="reg-container">
+    <h3>📝 فرم ثبت‌نام عضویت در انجمن‌ها و کارگاه‌های پژوهش‌سرا</h3>
+    <p class="sub">ویژه تمامی دانش‌آموزان مقاطع تحصیلی ابتدایی، متوسطه اول و دوم شهرستان دهگلان</p>
+
+    <form class="reg-form" id="regForm" onsubmit="handleRegister(event)">
+      
+      <div class="form-group">
+        <label>👤 نام و نام خانوادگی:</label>
+        <input type="text" id="rName" required placeholder="مثال: سارا احمدی">
+      </div>
+
+      <div class="form-group">
+        <label>🔢 کد ملی (۱۰ رقم):</label>
+        <input type="text" id="rNationalId" required maxlength="10" placeholder="مثال: 3840123456" dir="ltr">
+      </div>
+
+      <div class="form-group">
+        <label>📱 شماره تماس (شاد فعال):</label>
+        <input type="text" id="rPhone" required placeholder="مثال: 09181234567" dir="ltr">
+      </div>
+
+      <div class="form-group">
+        <label>🏫 نام مدرسه محل تحصیل:</label>
+        <input type="text" id="rSchool" required placeholder="مثال: دبیرستان نمونه دولتی پروین اعتصامی">
+      </div>
+
+      <div class="form-group">
+        <label>🎓 پایه تحصیلی:</label>
+        <select id="rGrade" required onchange="checkGradeForMajor()">
+          <option value="">-- انتخاب پایه تحصیلی --</option>
+          <option value="پایه سوم ابتدایی">پایه سوم ابتدایی</option>
+          <option value="پایه چهارم ابتدایی">پایه چهارم ابتدایی</option>
+          <option value="پایه پنجم ابتدایی">پایه پنجم ابتدایی</option>
+          <option value="پایه ششم ابتدایی">پایه ششم ابتدایی</option>
+          <option value="پایه هفتم (متوسطه اول)">پایه هفتم (متوسطه اول)</option>
+          <option value="پایه هشتم (متوسطه اول)">پایه هشتم (متوسطه اول)</option>
+          <option value="پایه نهم (متوسطه اول)">پایه نهم (متوسطه اول)</option>
+          <option value="پایه دهم (متوسطه دوم)">پایه دهم (متوسطه دوم)</option>
+          <option value="پایه یازدهم (متوسطه دوم)">پایه یازدهم (متوسطه دوم)</option>
+          <option value="پایه دوازدهم (متوسطه دوم)">پایه دوازدهم (متوسطه دوم)</option>
+        </select>
+      </div>
+
+      <!-- Conditional Major Box -->
+      <div class="form-group" id="majorBox">
+        <label>📚 رشته تحصیلی (ویژه متوسطه دوم):</label>
+        <select id="rMajor">
+          <option value="">-- انتخاب رشته تحصیلی --</option>
+          <option value="علوم تجربی">علوم تجربی</option>
+          <option value="ریاضی فیزیک">ریاضی فیزیک</option>
+          <option value="علوم انسانی">علوم انسانی</option>
+          <option value="فنی و حرفه‌ای">فنی و حرفه‌ای</option>
+          <option value="کاردانش">کاردانش</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="assocBoxClass">
+        <label>🔬 انجمن علمی مورد علاقه (اختیاری):</label>
+        <select id="rAssoc">
+          <option value="انجمن رباتیک، کدنویسی و AI">انجمن رباتیک، کدنویسی و AI</option>
+          <option value="انجمن فناوری نانو">انجمن فناوری نانو</option>
+          <option value="انجمن زیست‌فناوری و سلول‌های بنیادی">انجمن زیست‌فناوری و سلول‌های بنیادی</option>
+          <option value="انجمن نجوم و اختر فیزیک">انجمن نجوم و اختر فیزیک</option>
+          <option value="انجمن فیزیک و انرژی‌های نوین">انجمن فیزیک و انرژی‌های نوین</option>
+          <option value="انجمن شیمی و مواد پیشرفته">انجمن شیمی و مواد پیشرفته</option>
+          <option value="انجمن گیاهان دارویی و طب ایرانی">انجمن گیاهان دارویی و طب ایرانی</option>
+          <option value="انجمن ادبیات، نجوم و علوم انسانی">انجمن ادبیات، نجوم و علوم انسانی</option>
+        </select>
+      </div>
+
+      <div class="full" style="margin-top: 10px;">
+        <button type="submit" class="btn-submit-reg">⚡ ارسال اطلاعات و ثبت‌نام در پژوهش‌سرا</button>
+      </div>
+    </form>
+
+    <div class="reg-success" id="regSuccess">
+      <h4 style="font-size:18px; margin-bottom:8px;">🎉 ثبت‌نام شما با موفقیت انجام شد!</h4>
+      <p style="font-size:14px; color:#333;">کد رهگیری اختصاصی شما: <b id="regCode" style="color:#0d6e6e; font-size:16px;">REG-1405-0000</b></p>
+      <p style="font-size:13px; color:#555; margin-top:8px;">اطلاعات شما در پایگاه داده مدیریت پژوهش سرای رازی دهگلان ثبت گردید. اطلاعیه‌های شروع کارگاه‌ها از طریق پیام‌رسان شاد ارسال خواهد شد.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= About Section ================= -->
+<section id="about">
+  <div class="sec-header">
+    <h3>معرفی پژوهش سرای رازی دهگلان</h3>
+    <p>پل ارتباطی میان آموزش تئوری کلاس‌های درس و تجربیات عملی کارگاهی</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h4>رسالت ما: کشف و پرورش استعدادهای درخشان شهرستان دهگلان</h4>
+      <p>پژوهش سرای دانش‌آموزی رازی شهرستان دهگلان به عنوان یکی از مراکز علمی ممتاز اداره کل آموزش و پرورش استان کردستان، با هدف ایجاد محیطی پویا جهت بروز خلاقیت‌های دانش‌آموزان تمامی مقاطع تحصیلی (ابتدایی، متوسطه اول و دوم) تأسیس گردیده است.</p>
+      <p>ما باور داریم که هر دانش‌آموز دارای استعدادی منحصر‌به‌فرد در یکی از شاخه‌های علوم پایه، مهندسی، فناوری نوین یا ادبیات است. پژوهش سرای رازی با بهره‌گیری از اساتید راهنما و امکانات آزمایشگاهی، زمینه تلفیق دانش نظری و فعالیت‌های عملی را برای آینده‌سازان ایران اسلامی فراهم می‌سازد.</p>
+      <div class="about-features">
+        <div class="feature-box">
+          <div class="feature-icon">💡</div>
+          <div><b>تقویت روحیه پرسش‌گری</b><small style="color:#777;font-size:12px;">هدایت ایده‌های خلاقانه</small></div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🧪</div>
+          <div><b>کارگاه‌های مهارت‌محور</b><small style="color:#777;font-size:12px;">آزمایش‌های تخصصی</small></div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🏆</div>
+          <div><b>آمادگی جشنواره‌ها</b><small style="color:#777;font-size:12px;">خوارزمی و کاظمی آشتیانی</small></div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🤝</div>
+          <div><b>کار تیمی و پژوهشی</b><small style="color:#777;font-size:12px;">تشکیل تیم‌های علمی</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-image">
+      <img src="img/lab-biotech.jpg" alt="فعالیت دانش‌آموزان در آزمایشگاه پژوهش سرای رازی دهگلان">
+    </div>
+  </div>
+</section>
+
+<!-- ================= Scientific Associations ================= -->
+<section id="assocs" style="background: #faf6ee;">
+  <div class="sec-header">
+    <h3>انجمن‌های علمی - پژوهشی دانش‌آموزی</h3>
+    <p>عضویت در انجمن‌ها فرصتی برای یادگیری تخصصی و شرکت در مسابقات کشوری</p>
+  </div>
+  <div class="assoc-grid">
+    <div class="assoc-card">
+      <div class="assoc-icon">🤖</div>
+      <h4>انجمن رباتیک، کدنویسی و AI</h4>
+      <p>آموزش برنامه‌نویسی پایتون، اسکرچ، ساخت ربات‌های جنگجو و مسیریاب، و آشنایی با هوش مصنوعی و اینترنت اشیاء.</p>
+      <button class="btn-assoc" onclick="openModal('انجمن رباتیک و کدنویسی', 'این انجمن روزهای یکشنبه و سه‌شنبه کارگاه‌های عملی ساخت ربات و برنامه‌نویسی را برگزار می‌کند. دانش‌آموزان در این دوره جهت شرکت در مسابقات کشوری رباتیک و لیگ کدنویسی آماده می‌شوند.')">اطلاعات عضویت</button>
+    </div>
+    <div class="assoc-card">
+      <div class="assoc-icon">🔬</div>
+      <h4>انجمن نانو‌فناوری</h4>
+      <p>بررسی دنیای شگفت‌انگیز نانومواد، سنتز نانوذرات، و آمادگی برای المپیاد ملی دانش‌آموزی علوم و فناوری نانو.</p>
+      <button class="btn-assoc" onclick="openModal('انجمن فناوری نانو', 'با همکاری ستاد ویژه توسعه فناوری نانو، کلاس‌های آمادگی المپیاد نانو و کارگاه‌های شبیه‌سازی در پژوهش‌سرا برگزار می‌شود. اعضای برتر به اردوی عملی آزمایشگاه نانو اعزام می‌گردند.')">اطلاعات عضویت</button>
+    </div>
+    <div class="assoc-card">
+      <div class="assoc-icon">🧬</div>
+      <h4>انجمن زیست‌فناوری و سلول‌های بنیادی</h4>
+      <p>آشنایی با مهندسی ژنتیک، کشت بافت، تشریح گیاهی و جانوری و اجرای پروژه‌های بیوتکنولوژی دانش‌آموزی.</p>
+      <button class="btn-assoc" onclick="openModal('انجمن زیست‌فناوری', 'در این انجمن، دانش‌آموزان با استفاده از میکروسکوپ‌های پیشرفته و کیت‌های تشخیصی، آزمایش‌های زیست‌شناسی را انجام داده و برای جشنواره علمی-پژوهشی آماده می‌شوند.')">اطلاعات عضویت</button>
+    </div>
+    <div class="assoc-card">
+      <div class="assoc-icon">🔭</div>
+      <h4>انجمن نجوم و اختر فیزیک</h4>
+      <p>رصد آسمان شب، شناخت منظومه شمسی، کار با تلسکوپ‌های شکستی و بازتابی و عکاسی نجومی.</p>
+      <button class="btn-assoc" onclick="openModal('انجمن نجوم', 'برنامه‌های رصد شبانه اجرام آسمانی (ماه، سیارات و اختفاها) با تلسکوپ مجهز پژوهش‌سرا برگزار می‌شود. تمامی علاقه‌مندان می‌توانند عضو این انجمن شوند.')">اطلاعات عضویت</button>
+    </div>
+    <div class="assoc-card">
+      <div class="assoc-icon">⚡</div>
+      <h4>انجمن فیزیک و انرژی‌های نوین</h4>
+      <p>ساخت دست‌سازه‌های فیزیکی، سلول‌های خورشیدی، آزمایش‌های نور و الکتریسیته و بررسی پدیده‌های جذاب فیزیک.</p>
+      <button class="btn-assoc" onclick="openModal('انجمن فیزیک', 'این انجمن ویژه علاقه‌مندان به درک عمیق قوانین طبیعت و ساخت دست‌سازه‌های خلاقانه جهت ارایه در بخش دست‌سازه‌های جشنواره خوارزمی است.')">اطلاعات عضویت</button>
+    </div>
+    <div class="assoc-card">
+      <div class="assoc-icon">🧪</div>
+      <h4>انجمن شیمی و مواد پیشرفته</h4>
+      <p>انجام واکنش‌های شیمیایی جذاب، بلورسازی، بررسی شیمی محیط زیست و ساخت ترکیبات کاربردی.</p>
+      <button class="btn-assoc" onclick="openModal('انجمن شیمی', 'آزمایشگاه شیمی پژوهش‌سرا مکانی ایمن و مجهز برای تجربه واکنش‌های شیمیایی، تیتراسیون و ساخت دست‌سازه‌های شیمیایی تحت نظارت اساتید است.')">اطلاعات عضویت</button>
+    </div>
+    <div class="assoc-card">
+      <div class="assoc-icon">🌿</div>
+      <h4>انجمن گیاهان دارویی و طب ایرانی</h4>
+      <p>شناسایی فلور گیاهی منطقه کردستان و دهگلان، استخراج اسانس و عصاره، و تهیه محصولات بهداشتی و درمانی طبیعی.</p>
+      <button class="btn-assoc" onclick="openModal('انجمن گیاهان دارویی', 'با توجه به ظرفیت بی‌نظیر گیاهان دارویی استان کردستان، این انجمن به دانش‌آموزان روش‌های فرآوری، خشک‌کردن استاندارد و ساخت کرم‌ها و صابون‌های گیاهی را آموزش می‌دهد.')">اطلاعات عضویت</button>
+    </div>
+    <div class="assoc-card">
+      <div class="assoc-icon">📚</div>
+      <h4>انجمن ادبیات، نجوم و علوم انسانی</h4>
+      <p>شاهنامه‌خوانی، نگارش خلاق، فن بیان، پژوهش در تاریخ و فرهنگ ایران و هدایت طرح‌های علوم انسانی خوارزمی.</p>
+      <button class="btn-assoc" onclick="openModal('انجمن ادبیات و علوم انسانی', 'جلسات هفتگی نقد ادبی، تمرین سخنوری و آموزش روش تحقیق در علوم انسانی و اجتماعی ویژه دانش‌آموزان مستعد برگزار می‌شود.')">اطلاعات عضویت</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Labs & Facilities Showcase ================= -->
+<div class="labs-section" id="labs">
+  <div class="labs-wrap">
+    <div class="sec-header">
+      <h3>آزمایشگاه‌ها و کارگاه‌های مجهز پژوهش‌سرا</h3>
+      <p>تجهیزات مدرن در خدمت ایده‌های علمی دانش‌آموزان</p>
+    </div>
+    <div class="labs-grid">
+      <div class="lab-card">
+        <div class="lab-img">
+          <img src="img/lab-biotech.jpg" alt="آزمایشگاه زیست‌شناسی و سلول‌های بنیادی">
+          <span class="lab-tag">آزمایشگاه مرکزی</span>
+        </div>
+        <div class="lab-info">
+          <h4>آزمایشگاه جامع زیست‌شناسی و شیمی</h4>
+          <p>مجهز به میکروسکوپ‌های نوری و دیجیتال پیشرفته، سانتریفیوژ، انکوباتور، کیت‌های استخراج DNA، و کامل‌ترین ظروف و معرف‌های شیمیایی استاندارد جهت انجام پژوهش‌های بیولوژیکی و شیمیایی.</p>
+          <div class="lab-equip">
+            <span>میکروسکوپ نوری</span>
+            <span>سانتریفیوژ</span>
+            <span>کیت‌های تشریحی</span>
+            <span>مواد شیمیایی مجاز</span>
+          </div>
+        </div>
+      </div>
+      <div class="lab-card">
+        <div class="lab-img">
+          <img src="img/lab-robotics.jpg" alt="کارگاه رباتیک و کدنویسی">
+          <span class="lab-tag">کارگاه فناوری</span>
+        </div>
+        <div class="lab-info">
+          <h4>کارگاه رباتیک، الکترونیک و پرینت سه‌بعدی</h4>
+          <p>فضایی تخصصی مجهز به رایانه‌های متصل به اینترنت پرسرعت، بردهای آموزشی آردوینو و رزبری‌پای، قطعات مکانیکی ساخت ربات، هویه و ابزار دقیق الکترونیک برای ساخت دست‌سازه‌ها.</p>
+          <div class="lab-equip">
+            <span>لپ‌تاپ و سیستم‌ها</span>
+            <span>کیت آردوینو</span>
+            <span>سنسورها و موتورها</span>
+            <span>ابزار الکترونیک</span>
+          </div>
+        </div>
+      </div>
+      <div class="lab-card">
+        <div class="lab-img">
+          <img src="img/astronomy.jpg" alt="سایت نجوم و فیزیک">
+          <span class="lab-tag">بخش نجوم</span>
+        </div>
+        <div class="lab-info">
+          <h4>رصدخانه سیار و آزمایشگاه فیزیک اپتیک</h4>
+          <p>دارای تلسکوپ حرفه‌ای جهت رصد خورشید و شب‌های نجومی، همراه با میزهای اپتیک، لیزر، دستگاه‌های اندازه‌گیری دقیق فیزیکی و مولد واندوگراف جهت آموزش ملموس مفاهیم فیزیک.</p>
+          <div class="lab-equip">
+            <span>تلسکوپ رصدی</span>
+            <span>میز اپتیک و لیزر</span>
+            <span>کره سیار اخترشناسی</span>
+            <span>ابزار الکترومغناطیس</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Dynamic E-learning & Content Section ================= -->
+<section id="content-sec">
+  <div class="content-section">
+    <div class="sec-header" style="margin-bottom:30px;">
+      <h3>آموزش مجازی، شیوه‌نامه‌ها و فعالیت‌های جاری</h3>
+      <p>محتوای این بخش به طور مستقیم و پویا از مخزن سایت بارگذاری می‌شود</p>
+    </div>
+
+    <div class="filter-bar">
+      <div class="tabs" id="contentTabs">
+        <button class="tab-btn active" data-filter="all">همه موارد</button>
+        <button class="tab-btn" data-filter="pdf">📄 جزوات و شیوه‌نامه‌ها (PDF)</button>
+        <button class="tab-btn" data-filter="doc">📝 اسناد آفیس (Word / PPT / Excel)</button>
+        <button class="tab-btn" data-filter="archive">📦 نرم‌افزار و فایل‌های فشرده</button>
+        <button class="tab-btn" data-filter="video">🎬 ویدیوهای آموزشی</button>
+        <button class="tab-btn" data-filter="link">🔗 سامانه‌ها و پیوندها</button>
+      </div>
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" id="searchInput" placeholder="جستجو در فعالیت‌ها و فایل‌ها...">
+      </div>
+    </div>
+
+    <div class="content-grid" id="contentGrid">
+      <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #888;">
+        ⏳ در حال دریافت آخرین اطلاعات از مخزن پژوهش‌سرا...
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ Section ================= -->
+<section id="faq">
+  <div class="sec-header">
+    <h3>پرسش‌های متداول دانش‌آموزان و والدین</h3>
+    <p>پاسخ به پرتکرارترین سوالات درباره نحوه فعالیت پژوهش سرای رازی دهگلان</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">چگونه می‌توانم به عضویت پژوهش سرای دانش‌آموزی رازی درآیم؟</div>
+      <div class="faq-a"><p>تمامی دانش‌آموزان شاغل به تحصیل در مدارس شهرستان دهگلان (ابتدایی دوره دوم، متوسطه اول و دوم) می‌توانند با مراجعه به فرم ثبت‌نام آنلاین همین سایت (بخش بالای صفحه) یا مراجعه حضوری به دفتر پژوهش‌سرا، عضویت خود را ثبت نمایند.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">آیا شرکت در کارگاه‌ها و انجمن‌های علمی هزینه دارد؟</div>
+      <div class="faq-a"><p>با توجه به حمایت مدیریت آموزش و پرورش شهرستان دهگلان، عضویت عمومی و اکثر کارگاه‌های هدایت پژوهشی به صورت رایگان یا با کمترین هزینه یارانه‌ای (صرفاً جهت تأمین مواد مصرفی آزمایشگاه) برگزار می‌شود.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">آیا مدارس می‌توانند به صورت گروهی برای بازدید از آزمایشگاه‌ها وقت بگیرند؟</div>
+      <div class="faq-a"><p>بله! مدیران و معلمان محترم مدارس شهرستان دهگلان می‌توانند با ارسال نامه کتبی یا هماهنگی تلفنی با مدیریت پژوهش‌سرا، طبق جدول زمان‌بندی، کلاس‌های علوم تجربی، فیزیک، شیمی، زیست‌شناسی و کار و فناوری خود را در محل آزمایشگاه‌های پژوهش‌سرا برگزار نمایند.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Video Player Modal ================= -->
+<div class="vmodal" id="vmodal" role="dialog" aria-modal="true" aria-label="پخش ویدیو">
+  <button class="vclose" id="vclose" aria-label="بستن">✕</button>
+  <div class="vbox">
+    <div class="vframe" id="vframe"></div>
+  </div>
+  <div class="vtitle" id="vtitle"></div>
+  <div class="vhint">برای بستن، روی زمینه تیره کلیک کنید یا کلید Esc را بزنید</div>
+</div>
+
+<!-- ================= Modal Popup ================= -->
+<div class="modal-overlay" id="infoModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modalTitle">عنوان</h3>
+    <p id="modalDesc">توضیحات</p>
+    <div style="text-align: left;">
+      <button class="btn-primary" style="padding: 8px 24px; font-size: 14px; border: none; cursor: pointer;" onclick="closeModal()">متوجه شدم</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Footer ================= -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>درباره پژوهش سرای رازی دهگلان</h4>
+      <p>پژوهش سرای دانش‌آموزی رازی، وابسته به مدیریت آموزش و پرورش شهرستان دهگلان، مرکزی علمی و آموزشی جهت شکوفایی خلاقیت‌های دانش‌آموزان، توسعه مهارت‌های کارگاهی و ارتقای سطح علمی فرزندان این مرز و بوم است.</p>
+    </div>
+    <div class="footer-col">
+      <h4>پیوندهای سریع</h4>
+      <ul class="footer-links">
+        <li><a href="#register">📝 ثبت‌نام آنلاین در پژوهش‌سرا</a></li>
+        <li><a href="#about">معرفی پژوهش‌سرا</a></li>
+        <li><a href="#assocs">انجمن‌های علمی</a></li>
+        <li><a href="#labs">آزمایشگاه‌های تخصصی</a></li>
+        <li><a href="#content-sec">دانلود بخشنامه‌ها و جزوات</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>اطلاعات تماس و آدرس</h4>
+      <ul class="footer-contact">
+        <li>📍 <b>آدرس:</b> استان کردستان، شهرستان دهگلان، پژوهش سرای دانش‌آموزی رازی</li>
+        <li>📞 <b>تلفن تماس:</b> ۰۸۷-۳۵۱۸۰۰۰۰</li>
+        <li>💬 <b>کانال رسمی در شبکه شاد و ایتا:</b> DehgolanSRC@</li>
+        <li>⏰ <b>ساعات کاری:</b> شنبه تا چهارشنبه از ساعت ۸:۰۰ صبح الی ۱۷:۰۰</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>کلیه حقوق مادی و معنوی این وب‌سایت متعلق به <b>پژوهش سرای دانش‌آموزی رازی شهرستان دهگلان</b> می‌باشد.</p>
+  </div>
+</footer>
+
+<!-- ================= Scripts ================= -->
+<script>
+  // --- Check Grade for Conditional Major Box ---
+  function checkGradeForMajor() {
+    const grade = document.getElementById('rGrade').value;
+    const majorBox = document.getElementById('majorBox');
+    const rMajor = document.getElementById('rMajor');
+    if (grade.includes('دهم') || grade.includes('یازدهم') || grade.includes('دوازدهم')) {
+      majorBox.style.display = 'block';
+      rMajor.setAttribute('required', 'true');
+    } else {
+      majorBox.style.display = 'none';
+      rMajor.removeAttribute('required');
+      rMajor.value = '';
+    }
+  }
+
+  // --- Registration Handler ---
+  function handleRegister(e) {
+    e.preventDefault();
+    const name = document.getElementById('rName').value.trim();
+    const nationalId = document.getElementById('rNationalId').value.trim();
+    const phone = document.getElementById('rPhone').value.trim();
+    const school = document.getElementById('rSchool').value.trim();
+    const grade = document.getElementById('rGrade').value;
+    const major = document.getElementById('rMajor').value || '-';
+    const assoc = document.getElementById('rAssoc').value;
+
+    if (nationalId.length !== 10 || isNaN(nationalId)) {
+      alert('لطفاً کد ملی ۱۰ رقمی معتبر وارد نمایید.');
+      return;
+    }
+
+    const regId = 'REG-1405-' + Math.floor(1000 + Math.random() * 9000);
+    const newReg = {
+      id: regId,
+      fullName: name,
+      nationalId: nationalId,
+      phone: phone,
+      school: school,
+      grade: grade,
+      major: major,
+      assoc: assoc,
+      date: new Date().toLocaleDateString('fa-IR')
+    };
+
+    // Save locally
+    let regs = [];
+    try {
+      regs = JSON.parse(localStorage.getItem('dehgolansrc_local_regs') || '[]');
+    } catch(err) { regs = []; }
+    regs.unshift(newReg);
+    localStorage.setItem('dehgolansrc_local_regs', JSON.stringify(regs));
+
+    // Show confirmation
+    document.getElementById('regCode').textContent = regId;
+    document.getElementById('regSuccess').style.display = 'block';
+    document.getElementById('regForm').reset();
+    document.getElementById('majorBox').style.display = 'none';
+    window.scrollTo({ top: document.getElementById('regSuccess').offsetTop - 100, behavior: 'smooth' });
+  }
+
+  // --- Particle Canvas Engine ---
+  (function initParticles(){
+    const canvas = document.getElementById('particles-canvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    
+    function resize(){
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor(){
+        this.reset();
+      }
+      reset(){
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2.5 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.speedY = (Math.random() - 0.5) * 0.8;
+        this.opacity = Math.random() * 0.6 + 0.2;
+      }
+      update(){
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if(this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+          this.reset();
+        }
+      }
+      draw(){
+        ctx.fillStyle = `rgba(201, 162, 75, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for(let i=0; i<60; i++){
+      particles.push(new Particle());
+    }
+
+    function animate(){
+      ctx.clearRect(0, 0, width, height);
+      for(let i=0; i<particles.length; i++){
+        particles[i].update();
+        particles[i].draw();
+        for(let j=i+1; j<particles.length; j++){
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if(dist < 110){
+            ctx.strokeStyle = `rgba(201, 162, 75, ${0.15 * (1 - dist/110)})`;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+
+  // --- Scrollbar Progress ---
+  window.addEventListener('scroll', function(){
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById('scrollbar-progress').style.width = scrolled + '%';
+  });
+
+  // --- Mobile Menu Toggle ---
+  document.getElementById('menuBtn').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('show');
+  });
+
+  // --- Animated Numbers Counter ---
+  const stats = document.querySelectorAll('.stat-num');
+  let started = false;
+  window.addEventListener('scroll', () => {
+    if(!started && window.scrollY > 100) {
+      stats.forEach(st => {
+        const target = +st.getAttribute('data-val');
+        let count = 0;
+        const speed = target / 40;
+        const updateCount = () => {
+          if(count < target) {
+            count += speed;
+            st.innerText = '+' + Math.ceil(count);
+            setTimeout(updateCount, 30);
+          } else {
+            st.innerText = '+' + target;
+          }
+        };
+        updateCount();
+      });
+      started = true;
+    }
+  });
+
+  // --- FAQ Accordion ---
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      item.classList.toggle('active');
+      const ans = item.querySelector('.faq-a');
+      if(item.classList.contains('active')){
+        ans.style.maxHeight = ans.scrollHeight + "px";
+      } else {
+        ans.style.maxHeight = null;
+      }
+    });
+  });
+
+  // --- Modal Popup ---
+  function openModal(title, desc) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalDesc').textContent = desc;
+    document.getElementById('infoModal').style.display = 'flex';
+  }
+  function closeModal() {
+    document.getElementById('infoModal').style.display = 'none';
+  }
+
+  // --- Dynamic Content Loader from content.json ---
+  let allItems = [];
+  let currentFilter = 'all';
+
+  function fetchContent() {
+    fetch('content.json?v=' + Date.now())
+      .then(r => {
+        if(!r.ok) throw new Error();
+        return r.json();
+      })
+      .then(data => {
+        allItems = data.items || [];
+        renderContent();
+      })
+      .catch(() => {
+        document.getElementById('contentGrid').innerHTML = 
+          '<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: #a33;">⚠️ خطا در بارگذاری محتوا.</div>';
+      });
+  }
+
+  function renderContent() {
+    const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    const grid = document.getElementById('contentGrid');
+    grid.innerHTML = '';
+
+    const filtered = allItems.filter(item => {
+      const matchFilter = (currentFilter === 'all') || (item.type === currentFilter);
+      const matchQuery = !query || 
+        (item.title && item.title.toLowerCase().includes(query)) || 
+        (item.desc && item.desc.toLowerCase().includes(query));
+      return matchFilter && matchQuery;
+    });
+
+    if(filtered.length === 0) {
+      grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #777;">هیچ موردی مطابق جستجو یافت نشد.</div>';
+      return;
+    }
+
+    function esc(s){
+      return String(s == null ? '' : s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* ---- video modal logic ---- */
+    var vmodal = document.getElementById('vmodal');
+    var vframe = document.getElementById('vframe');
+    var vtitle = document.getElementById('vtitle');
+    var vclose = document.getElementById('vclose');
+
+    function toEmbed(url){
+      var m;
+      /* آپارات: aparat.com/v/HASH */
+      m = url.match(/aparat\.com\/v\/([\w]+)/i);
+      if(m) return {kind:'iframe', src:'https://www.aparat.com/video/video/embed/videohash/' + m[1] + '/vt/frame'};
+      /* یوتیوب */
+      m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w\-]+)/i);
+      if(m) return {kind:'iframe', src:'https://www.youtube.com/embed/' + m[1]};
+      /* فایل ویدیویی آپلودی (mp4, webm, mov) */
+      if(/\.(mp4|webm|ogg|m4v|mov)(\?.*)?$/i.test(url) || /^files\//.test(url))
+        return {kind:'video', src:url};
+      return null;
+    }
+
+    window.openVideo = function(url, title){
+      var emb = toEmbed(url);
+      if(!emb){ window.open(url, '_blank'); return false; }
+      vtitle.textContent = title || '';
+      if(emb.kind === 'iframe'){
+        vframe.innerHTML = '<iframe src="' + esc(emb.src) + '" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+      } else {
+        vframe.innerHTML = '<video src="' + esc(emb.src) + '" controls autoplay playsinline></video>';
+      }
+      vmodal.classList.add('open');
+      return false;
+    };
+
+    function closeVideo(){
+      vmodal.classList.remove('open');
+      vframe.innerHTML = '';
+    }
+    if(vclose) vclose.addEventListener('click', closeVideo);
+    if(vmodal) vmodal.addEventListener('click', function(e){ if(e.target === vmodal) closeVideo(); });
+    window.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeVideo(); });
+
+    const icons = {
+      'link': { cls: 'link', icon: '🔗', text: 'مشاهده پیوند / سامانه' },
+      'pdf': { cls: 'pdf', icon: '📄', text: 'دریافت فایل PDF' },
+      'doc': { cls: 'link', icon: '📝', text: 'دانلود سند آفیس' },
+      'archive': { cls: 'video', icon: '📦', text: 'دانلود فایل فشرده' },
+      'video': { cls: 'video', icon: '🎬', text: 'پخش ویدیو' }
+    };
+
+    filtered.forEach(it => {
+      const ic = icons[it.type] || icons['link'];
+      const div = document.createElement('div');
+      div.className = 'content-item';
+      
+      let btnHtml = '';
+      if(it.type === 'video') {
+        const safeTitle = esc(it.title || '');
+        btnHtml = `<a href="${it.url || '#'}" onclick="openVideo('${it.url || ''}', '${safeTitle}'); return false;" class="c-btn">${ic.icon} ${ic.text} ❬</a>`;
+      } else {
+        btnHtml = `<a href="${it.url || '#'}" target="_blank" class="c-btn">${ic.icon} ${ic.text} ❬</a>`;
+      }
+
+      div.innerHTML = `
+        <div>
+          <div class="c-header">
+            <div class="c-icon ${ic.cls}">${ic.icon}</div>
+            <div class="c-title">${it.title || 'بدون عنوان'}</div>
+          </div>
+          <p class="c-desc">${it.desc || ''}</p>
+        </div>
+        <div style="margin-top: 15px;">
+          ${btnHtml}
+        </div>
+      `;
+      grid.appendChild(div);
+    });
+  }
+
+  // Content Tabs
+  document.querySelectorAll('#contentTabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#contentTabs .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.getAttribute('data-filter');
+      renderContent();
+    });
+  });
+
+  // Search input
+  document.getElementById('searchInput').addEventListener('input', renderContent);
+
+  // Load Content on startup
+  fetchContent();
+</script>
+</body>
+</html>

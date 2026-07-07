@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>پنل مدیریت جامع | پژوهش سرای دانش‌آموزی رازی دهگلان</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+<style>
+  :root{
+    --navy:#0d6e6e;
+    --navy-dark:#073f3f;
+    --gold:#c9a24b;
+    --gold-light:#e8cf94;
+    --cream:#faf6ee;
+    --text:#2a2f3a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:Vazirmatn,Tahoma,"Segoe UI",sans-serif;}
+  body{background:var(--cream);color:var(--text);line-height:1.9;padding-bottom:60px;}
+  header{
+    background:linear-gradient(135deg,var(--navy),var(--navy-dark));
+    color:#fff;padding:24px 20px;text-align:center;
+    border-bottom:4px solid var(--gold);
+    box-shadow:0 6px 25px rgba(0,0,0,0.15);
+  }
+  header h1{font-size:22px;color:var(--gold-light);margin-bottom:6px;}
+  header p{font-size:13.5px;color:#c9d4ea;}
+  header .back-link{
+    display:inline-block;margin-top:12px;color:#fff;background:rgba(255,255,255,0.15);
+    padding:5px 15px;border-radius:20px;text-decoration:none;font-size:12.5px;transition:0.3s;
+  }
+  header .back-link:hover{background:var(--gold);color:var(--navy-dark);}
+  
+  .wrap{max-width:1050px;margin:25px auto;padding:0 16px;}
+  
+  .admin-tabs {
+    display:flex;gap:12px;margin-bottom:24px;border-bottom:2px solid #e2d7c0;padding-bottom:12px;flex-wrap:wrap;
+  }
+  .tab-btn {
+    background:#fff;border:1.5px solid #d8cdb4;color:var(--navy);padding:12px 24px;
+    border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;transition:0.3s;
+    display:flex;align-items:center;gap:8px;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background:linear-gradient(135deg,var(--navy),var(--navy-dark));color:#fff;border-color:var(--navy);
+    box-shadow:0 6px 15px rgba(13,110,110,0.2);
+  }
+
+  .card{
+    background:#fff;border:1px solid #eadfc7;border-radius:18px;
+    padding:24px 22px;margin-bottom:24px;box-shadow:0 10px 25px rgba(13,110,110,.06);
+  }
+  .card h2{font-size:17.5px;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px;border-bottom:1px dashed #eadfc7;padding-bottom:10px;}
+  label{display:block;font-size:13.5px;font-weight:700;color:var(--navy);margin:14px 0 6px;}
+  input[type=text],input[type=password],select,textarea{
+    width:100%;padding:11px 14px;border:1.5px solid #d8cdb4;border-radius:10px;
+    font-size:14px;background:#fffdf8;transition:.2s;font-family:inherit;
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3.5px rgba(201,162,75,.18);}
+  .hint{font-size:11.5px;color:#7a8292;margin-top:4px;line-height:1.6;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--navy),#125e5e);color:#fff;
+    font-size:14px;font-weight:700;padding:11px 24px;border-radius:24px;
+    transition:.25s;font-family:inherit;margin-top:16px;
+  }
+  .btn:hover{background:linear-gradient(135deg,var(--gold),#b8903a);color:var(--navy-dark);box-shadow:0 6px 15px rgba(201,162,75,0.3);}
+  .btn.sm{padding:6px 14px;font-size:12.5px;margin:0;}
+  .btn.danger{background:linear-gradient(135deg,#c33,#912);}
+  .btn.danger:hover{background:linear-gradient(135deg,#e44,#b22);color:#fff;}
+  .btn.gray{background:linear-gradient(135deg,#6a7284,#4a5164);}
+  .btn.gold{background:linear-gradient(135deg,var(--gold),#b8903a);color:var(--navy-dark);}
+  .btn.excel{background:linear-gradient(135deg,#1b5e20,#2e7d32);}
+  .btn.word{background:linear-gradient(135deg,#0d47a1,#1565c0);}
+
+  .msg{border-radius:12px;padding:13px 16px;font-size:13.5px;margin-top:14px;display:none;}
+  .msg.ok{display:block;background:#e8f5e9;border:1px solid #66bb6a;color:#1b5e20;}
+  .msg.err{display:block;background:#fdecea;border:1px solid #ef9a9a;color:#b71c1c;}
+  .msg.info{display:block;background:#e3f2fd;border:1px solid #90caf9;color:#0d47a1;}
+  
+  .item{
+    display:flex;align-items:center;gap:12px;background:var(--cream);
+    border:1px solid #eadfc7;border-radius:14px;padding:14px 16px;margin-bottom:12px;flex-wrap:wrap;transition:0.2s;
+  }
+  .item:hover{border-color:var(--navy);box-shadow:0 4px 12px rgba(0,0,0,0.04);}
+  .item .tic{font-size:24px;flex:0 0 auto;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,0.05);}
+  .item .tinfo{flex:1;min-width:180px;}
+  .item .tinfo b{font-size:14px;color:var(--navy);display:block;margin-bottom:2px;}
+  .item .tinfo small{font-size:12px;color:#7a8292;display:block;}
+  .item .acts{display:flex;gap:8px;flex:0 0 auto;}
+  
+  .table-responsive { overflow-x: auto; margin-top: 15px; }
+  .reg-table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: #fff; }
+  .reg-table th { background: #0d6e6e; color: #fff; padding: 12px 10px; text-align: right; font-weight: 800; white-space: nowrap; }
+  .reg-table td { padding: 11px 10px; border-bottom: 1px solid #eee; color: #333; }
+  .reg-table tr:hover td { background: #fcfaf5; }
+  .badge { background: #e3f2fd; color: #0d47a1; padding: 3px 8px; border-radius: 6px; font-size: 12px; font-weight: 700; display: inline-block; }
+  .token-box{background:#f8f9fa;border:1px solid #e9ecef;border-radius:10px;padding:12px;font-size:12.5px;margin-bottom:14px;}
+  .repo-badge{background:#e8f0fe;color:#1a73e8;padding:4px 10px;border-radius:6px;font-family:monospace;font-size:13px;font-weight:bold;direction:ltr;display:inline-block;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🛠 پنل مدیریت اختصاصی پژوهش سرای رازی دهگلان</h1>
+  <p>مدیریت محتوا و پایگاه داده ثبت‌نام‌کنندگان بر روی مخزن <span class="repo-badge">mohammadpartoo/dehgolansrc</span></p>
+  <a href="index.html" class="back-link">🏠 مشاهده سایت اصلی (پیش‌نمایش زنده)</a>
+</header>
+
+<div class="wrap">
+
+  <!-- لاگین / توکن گیت‌هاب -->
+  <div class="card" id="cardLogin">
+    <h2>🔑 اتصال به مخزن گیت‌هاب (ورود مدیر)</h2>
+    <div class="token-box">
+      <b>جهت همگام‌سازی و ذخیره‌سازی ابری روی گیت‌هاب، توکن خود را وارد کنید:</b>
+      <p style="margin-top:6px; color:#555;">اگر در حال حاضر توکن ندارید یا آفلاین هستید، می‌توانید با دکمه ورود آفلاین نیز به اطلاعات ثبت‌نام‌کنندگان و محتوا دسترسی داشته باشید.</p>
+    </div>
+    <label>توکن گیت‌هاب (Personal Access Token):</label>
+    <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" dir="ltr">
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <button class="btn" id="btnLogin">⚡ اتصال به گیت‌هاب و بارگذاری اطلاعات</button>
+      <button class="btn gray" id="btnOfflineLogin">📂 ورود آفلاین / مرور محلی اطلاعات</button>
+    </div>
+    <div class="msg" id="loginMsg"></div>
+  </div>
+
+  <!-- بخش اصلی پنل پس از ورود -->
+  <div id="mainPanel" style="display:none;">
+    
+    <div class="admin-tabs">
+      <button class="tab-btn active" id="tabBtnContent" onclick="switchTab('content')">📚 مدیریت محتوا و انواع فایل‌ها</button>
+      <button class="tab-btn" id="tabBtnRegs" onclick="switchTab('regs')">👥 ثبت‌نام‌کنندگان و دانش‌آموزان عضو</button>
+    </div>
+
+    <!-- ================== تب ۱: محتوای سایت ================== -->
+    <div id="sectionContent">
+      <div class="card">
+        <h2 id="formTitle">➕ افزودن محتوا، اطلاعیه یا فایل آموزشی جدید به سایت</h2>
+        
+        <label>نوع محتوا / فرمت فایل:</label>
+        <select id="fType" onchange="toggleFileUpload()">
+          <option value="link">🔗 پیوند خارجی (سایت، سامانه، کانال شاد، ایتا یا درایو)</option>
+          <option value="pdf">📄 جزوه و فایل متنی (فایل PDF)</option>
+          <option value="doc">📝 اسناد آفیس (Word .docx / PowerPoint .pptx / Excel .xlsx)</option>
+          <option value="archive">📦 نرم‌افزار یا فایل فشرده (ZIP / RAR)</option>
+          <option value="video">🎬 ویدیوی آموزشی (لینک آپارات، وبینار، پخش زنده)</option>
+        </select>
+
+        <label>عنوان محتوا / فایل آموزشی:</label>
+        <input type="text" id="fTitle" placeholder="مثال: شیوه‌نامه یا فایل ورد پروپوزال جشنواره علمی-پژوهشی">
+
+        <label id="lblUrl">آدرس اینترنتی (URL) پیوند یا ویدیو:</label>
+        <input type="text" id="fUrl" placeholder="https://..." dir="ltr">
+
+        <!-- باکس آپلود فایل (برای PDF، Word، Excel، PPT، ZIP) -->
+        <div id="fileUploadWrap" style="display:none; margin-top:12px; background:#fcfaf5; padding:15px; border-radius:12px; border:2px dashed #c9a24b;">
+          <label style="margin-top:0; color:#0d6e6e;">📤 آپلود مستقیم فایل از سیستم شما روی سرور گیت‌هاب (پوشه files):</label>
+          <input type="file" id="fFile" style="background:#fff; border:none; padding:6px 0;">
+          <div class="hint" style="margin-top:6px;">فرمت‌های مجاز: <b>PDF, DOCX, PPTX, XLSX, ZIP, RAR, JPG, PNG</b>. پس از انتخاب فایل و کلیک روی افزودن، فایل به صورت خودکار در مخزن گیت‌هاب آپلود و لینک آن در سایت فعال می‌شود.</div>
+        </div>
+
+        <label>توضیحات کوتاه (نمایش زیر عنوان در سایت):</label>
+        <textarea id="fDesc" rows="3" placeholder="توضیحات تکمیلی، شرایط استفاده یا راهنما..."></textarea>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn gold" id="btnSubmit">➕ افزودن و انتشار فوری در سایت</button>
+          <button class="btn gray" id="btnCancel" style="display:none;">✕ انصراف</button>
+        </div>
+        <div class="msg" id="formMsg"></div>
+      </div>
+
+      <div class="card">
+        <h2>📚 محتواها و فایل‌های منتشر شده در سایت</h2>
+        <div id="listWrap"></div>
+      </div>
+    </div>
+
+    <!-- ================== تب ۲: ثبت‌نام‌کنندگان ================== -->
+    <div id="sectionRegs" style="display:none;">
+      <div class="card">
+        <h2>👥 پایگاه داده دانش‌آموزان ثبت‌نام‌کننده در پژوهش‌سرا</h2>
+        <p style="font-size:13.5px; color:#555; margin-bottom:16px;">لیست زیر شامل تمامی دانش‌آموزانی است که از طریق سایت ثبت‌نام کرده‌اند یا اطلاعات آن‌ها در سیستم ثبت شده است. می‌توانید از این اطلاعات خروجی جدول‌دار ورد (Word) و اکسل (Excel) دریافت کنید.</p>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:18px; background:#f8f6f0; padding:15px; border-radius:14px; border:1px solid #e0d5bd;">
+          <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:240px;">
+            <span style="font-size:18px;">🔍</span>
+            <input type="text" id="regSearchInput" placeholder="جستجو بر اساس نام، کد ملی، مدرسه یا رشته..." style="margin:0; padding:8px 14px;">
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn word sm" onclick="exportToWord()">📄 خروجی ورد (جدول‌دار Word .doc)</button>
+            <button class="btn excel sm" onclick="exportToExcel()">📊 خروجی اکسل (Excel .csv)</button>
+            <button class="btn gold sm" onclick="saveRegsToGitHub()">☁️ ذخیره روی گیت‌هاب</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="reg-table" id="regsTableElement">
+            <thead>
+              <tr>
+                <th>کد رهگیری</th>
+                <th>نام و نام خانوادگی</th>
+                <th>کد ملی</th>
+                <th>شماره شاد</th>
+                <th>مدرسه</th>
+                <th>پایه تحصیلی</th>
+                <th>رشته تحصیلی</th>
+                <th>انجمن انتخابی</th>
+                <th>تاریخ ثبت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody id="regsTableBody"></tbody>
+          </table>
+        </div>
+        <div class="msg" id="regMsg"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var OWNER = 'mohammadpartoo';
+  var REPO  = 'dehgolansrc';
+  var API   = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/';
+  var token = '';
+  
+  var contentSha = null;
+  var items = [];
+  var editIndex = -1;
+
+  var regsSha = null;
+  var registrations = [];
+
+  var $ = function(id){ return document.getElementById(id); };
+  function show(id, cls, text){ var el = $(id); el.className = 'msg ' + cls; el.textContent = text; }
+
+  function b64EncodeUnicode(str){ return btoa(unescape(encodeURIComponent(str))); }
+  function b64DecodeUnicode(str){ return decodeURIComponent(escape(atob(str.replace(/\n/g,'')))); }
+
+  function gh(path, opts){
+    opts = opts || {};
+    opts.headers = { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' };
+    return fetch(API + path, opts);
+  }
+
+  var savedToken = localStorage.getItem('gh_token_dehgolansrc');
+  if(savedToken) $('ghToken').value = savedToken;
+
+  window.switchTab = function(t){
+    if(t === 'content'){
+      $('tabBtnContent').classList.add('active');
+      $('tabBtnRegs').classList.remove('active');
+      $('sectionContent').style.display = 'block';
+      $('sectionRegs').style.display = 'none';
+    } else {
+      $('tabBtnRegs').classList.add('active');
+      $('tabBtnContent').classList.remove('active');
+      $('sectionContent').style.display = 'none';
+      $('sectionRegs').style.display = 'block';
+      renderRegsTable();
+    }
+  };
+
+  $('btnLogin').onclick = function(){
+    token = $('ghToken').value.trim();
+    if(!token){ show('loginMsg','err','لطفاً توکن گیت‌هاب را وارد کنید.'); return; }
+    loadAllData();
+  };
+
+  $('btnOfflineLogin').onclick = function(){
+    loadOfflineData();
+  };
+
+  function loadAllData(){
+    show('loginMsg','info','در حال برقراری ارتباط با مخزن گیت‌هاب...');
+    
+    gh('content.json?ref=main').then(r => {
+      if(r.status === 401) throw new Error('توکن نامعتبر است.');
+      if(!r.ok) return null;
+      return r.json();
+    }).then(data => {
+      if(data){
+        contentSha = data.sha;
+        try{ items = JSON.parse(b64DecodeUnicode(data.content)).items || []; }catch(e){}
+      }
+      return gh('registrations.json?ref=main');
+    }).then(r => {
+      if(!r || !r.ok) return null;
+      return r.json();
+    }).then(data => {
+      if(data){
+        regsSha = data.sha;
+        try{ registrations = JSON.parse(b64DecodeUnicode(data.content)).registrations || []; }catch(e){}
+      }
+      mergeLocalRegs();
+      localStorage.setItem('gh_token_dehgolansrc', token);
+      show('loginMsg','ok','✅ اتصال برقرار شد و اطلاعات با موفقیت بارگذاری گردید.');
+      $('mainPanel').style.display = 'block';
+      renderList();
+      renderRegsTable();
+    }).catch(e => {
+      show('loginMsg','err','❌ خطا در اتصال: ' + e.message + '. در حال بارگذاری آفلاین...');
+      loadOfflineData();
+    });
+  }
+
+  function loadOfflineData(){
+    fetch('content.json').then(r => r.json()).then(d => { items = d.items || []; }).catch(()=>{});
+    fetch('registrations.json').then(r => r.json()).then(d => {
+      registrations = d.registrations || [];
+      mergeLocalRegs();
+      $('mainPanel').style.display = 'block';
+      renderList();
+      renderRegsTable();
+      show('loginMsg','ok','📂 ورود آفلاین با موفقیت انجام شد.');
+    }).catch(()=>{ mergeLocalRegs(); $('mainPanel').style.display = 'block'; renderRegsTable(); });
+  }
+
+  function mergeLocalRegs(){
+    try{
+      var localRegs = JSON.parse(localStorage.getItem('dehgolansrc_local_regs') || '[]');
+      localRegs.forEach(lr => {
+        if(!registrations.find(r => r.id === lr.id)){
+          registrations.unshift(lr);
+        }
+      });
+    }catch(e){}
+  }
+
+  // --- نمایش آپلود فایل ---
+  window.toggleFileUpload = function(){
+    var t = $('fType').value;
+    if(t === 'pdf' || t === 'doc' || t === 'archive' || t === 'video'){
+      $('fileUploadWrap').style.display = 'block';
+      $('lblUrl').textContent = 'آدرس لینک اینترنتی (یا آپلود مستقیم فایل از کادر پایین):';
+    } else {
+      $('fileUploadWrap').style.display = 'none';
+      $('lblUrl').textContent = 'آدرس اینترنتی (URL) پیوند یا سامانه:';
+    }
+  };
+
+  function renderList(){
+    var wrap = $('listWrap');
+    wrap.innerHTML = '';
+    if(!items || items.length === 0){ wrap.innerHTML = '<p style="color:#888;">محتوای ثبت نشده است.</p>'; return; }
+    var icons = {'link':'🔗', 'pdf':'📄', 'doc':'📝', 'archive':'📦', 'video':'🎬'};
+    items.forEach((it, idx) => {
+      var div = document.createElement('div');
+      div.className = 'item' + (editIndex === idx ? ' editing' : '');
+      div.innerHTML = `
+        <div class="tic">${icons[it.type]||'📌'}</div>
+        <div class="tinfo"><b>${it.title}</b><small dir="ltr">${it.url}</small></div>
+        <div class="acts">
+          <button class="btn sm gray" onclick="editItem(${idx})">✏️ ویرایش</button>
+          <button class="btn sm danger" onclick="delItem(${idx})">🗑 حذف</button>
+        </div>`;
+      wrap.appendChild(div);
+    });
+  }
+
+  window.editItem = function(idx){
+    editIndex = idx; var it = items[idx];
+    $('fType').value = it.type||'link'; $('fTitle').value = it.title||''; $('fUrl').value = it.url||''; $('fDesc').value = it.desc||'';
+    $('formTitle').textContent = '✏️ ویرایش فعالیت'; $('btnCancel').style.display = 'inline-flex';
+    toggleFileUpload();
+    renderList();
+  };
+
+  window.delItem = function(idx){
+    if(!confirm('آیا از حذف اطمینان دارید؟')) return;
+    items.splice(idx, 1); saveContentToGitHub('حذف فعالیت');
+  };
+
+  $('btnCancel').onclick = function(){
+    editIndex = -1; $('fTitle').value = ''; $('fUrl').value = ''; $('fDesc').value = ''; $('fFile').value = '';
+    $('formTitle').textContent = '➕ افزودن فعالیت جدید'; $('btnCancel').style.display = 'none'; toggleFileUpload(); renderList();
+  };
+
+  $('btnSubmit').onclick = function(){
+    var type = $('fType').value;
+    var title = $('fTitle').value.trim();
+    var url = $('fUrl').value.trim();
+    var desc = $('fDesc').value.trim();
+    var fileInput = $('fFile');
+
+    if(!title){ alert('عنوان محتوا الزامی است.'); return; }
+
+    if((type === 'pdf' || type === 'doc' || type === 'archive' || type === 'video') && fileInput.files && fileInput.files.length > 0){
+      if(!token){ alert('برای آپلود فایل روی گیت‌هاب ابتدا توکن خود را در بالای صفحه وارد کنید.'); return; }
+      var file = fileInput.files[0];
+      show('formMsg','info','در حال آپلود فایل (' + file.name + ') روی سرور گیت‌هاب...');
+      var reader = new FileReader();
+      reader.onload = function(e){
+        var b64 = e.target.result.split(',')[1];
+        var cleanName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+        var filePath = 'files/' + Date.now() + '-' + cleanName;
+        gh(filePath, {
+          method: 'PUT',
+          body: JSON.stringify({
+            message: 'آپلود فایل آموزشی: ' + file.name,
+            content: b64
+          })
+        }).then(r => {
+          if(!r.ok) throw new Error('خطا در آپلود فایل');
+          return r.json();
+        }).then(res => {
+          url = filePath;
+          addOrUpdateItem(type, title, url, desc);
+        }).catch(err => {
+          show('formMsg','err','❌ خطا در آپلود: ' + err.message);
+        });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      if(!url){ alert('لطفاً آدرس (URL) یا فایل را مشخص کنید.'); return; }
+      addOrUpdateItem(type, title, url, desc);
+    }
+  };
+
+  function addOrUpdateItem(type, title, url, desc){
+    var obj = { type: type, title: title, url: url, desc: desc };
+    if(editIndex >= 0) items[editIndex] = obj; else items.unshift(obj);
+    saveContentToGitHub(editIndex >= 0 ? 'ویرایش فعالیت' : 'افزودن فعالیت');
+  }
+
+  function saveContentToGitHub(msg){
+    if(!token){ alert('برای ذخیره مستقیم روی گیت‌هاب ابتدا توکن خود را در بالای صفحه وارد کنید.'); return; }
+    show('formMsg','info','در حال ذخیره روی گیت‌هاب...');
+    var body = { message: msg, content: b64EncodeUnicode(JSON.stringify({items:items}, null, 2)) };
+    if(contentSha) body.sha = contentSha;
+    gh('content.json', { method: 'PUT', body: JSON.stringify(body) }).then(r=>r.json()).then(res=>{
+      contentSha = res.content ? res.content.sha : null;
+      show('formMsg','ok','✅ تغییرات و فایل‌های جدید با موفقیت در گیت‌هاب منتشر شد!');
+      $('btnCancel').onclick();
+    });
+  }
+
+  function renderRegsTable(){
+    var q = ($('regSearchInput').value || '').trim().toLowerCase();
+    var tbody = $('regsTableBody');
+    tbody.innerHTML = '';
+
+    var filtered = registrations.filter(r => {
+      return !q || (r.fullName && r.fullName.toLowerCase().includes(q)) ||
+             (r.nationalId && r.nationalId.includes(q)) ||
+             (r.school && r.school.toLowerCase().includes(q)) ||
+             (r.major && r.major.toLowerCase().includes(q));
+    });
+
+    if(filtered.length === 0){
+      tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:25px;color:#888;">هیچ دانش‌آموزی مطابق جستجو یافت نشد.</td></tr>';
+      return;
+    }
+
+    filtered.forEach((r, idx) => {
+      var tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="badge">${r.id || '-'}</span></td>
+        <td><b>${r.fullName || '-'}</b></td>
+        <td dir="ltr" style="text-align:right;">${r.nationalId || '-'}</td>
+        <td dir="ltr" style="text-align:right;">${r.phone || '-'}</td>
+        <td>${r.school || '-'}</td>
+        <td>${r.grade || '-'}</td>
+        <td>${r.major || '-'}</td>
+        <td style="font-size:12px;color:#0d6e6e;"><b>${r.assoc || '-'}</b></td>
+        <td>${r.date || '-'}</td>
+        <td><button class="btn sm danger" onclick="deleteReg(${idx})">🗑</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  $('regSearchInput').addEventListener('input', renderRegsTable);
+
+  window.deleteReg = function(idx){
+    if(!confirm('آیا از حذف اطلاعات این دانش‌آموز اطمینان دارید؟')) return;
+    registrations.splice(idx, 1);
+    localStorage.setItem('dehgolansrc_local_regs', JSON.stringify(registrations));
+    renderRegsTable();
+  };
+
+  window.saveRegsToGitHub = function(){
+    if(!token){ alert('جهت همگام‌سازی و ذخیره در مخزن گیت‌هاب، لطفاً توکن خود را وارد نمایید.'); return; }
+    show('regMsg','info','در حال ذخیره‌سازی پایگاه داده ثبت‌نام‌کنندگان روی گیت‌هاب...');
+    var body = { message: 'بروزرسانی لیست دانش‌آموزان ثبت‌نامی', content: b64EncodeUnicode(JSON.stringify({registrations:registrations}, null, 2)) };
+    if(regsSha) body.sha = regsSha;
+    gh('registrations.json', { method: 'PUT', body: JSON.stringify(body) }).then(r=>r.json()).then(res=>{
+      regsSha = res.content ? res.content.sha : null;
+      show('regMsg','ok','✅ پایگاه داده دانش‌آموزان روی گیت‌هاب ذخیره شد!');
+    });
+  };
+
+  window.exportToExcel = function(){
+    if(!registrations || registrations.length === 0){ alert('هیچ اطلاعاتی جهت خروجی وجود ندارد.'); return; }
+    var csvContent = "\uFEFF";
+    csvContent += "کد رهگیری,نام و نام خانوادگی,کد ملی,شماره تماس شاد,نام مدرسه,پایه تحصیلی,رشته تحصیلی,انجمن انتخابی,تاریخ ثبت\r\n";
+    
+    registrations.forEach(r => {
+      var row = [
+        `"${r.id||''}"`, `"${r.fullName||''}"`, `"${r.nationalId||''}"`,
+        `"${r.phone||''}"`, `"${r.school||''}"`, `"${r.grade||''}"`,
+        `"${r.major||''}"`, `"${r.assoc||''}"`, `"${r.date||''}"`
+      ];
+      csvContent += row.join(",") + "\r\n";
+    });
+
+    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    var link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "DehgolanSRC_Registrations.csv";
+    link.click();
+  };
+
+  window.exportToWord = function(){
+    if(!registrations || registrations.length === 0){ alert('هیچ اطلاعاتی جهت خروجی وجود ندارد.'); return; }
+    
+    var htmlContent = `
+    <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+    <head>
+      <meta charset='utf-8'>
+      <title>خروجی ثبت‌نام‌کنندگان پژوهش سرای رازی دهگلان</title>
+      <style>
+        body { font-family: 'Tahoma', 'B Nazanin', sans-serif; direction: rtl; text-align: right; }
+        h2 { color: #0d6e6e; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; direction: rtl; }
+        th { background-color: #0d6e6e; color: #ffffff; border: 1px solid #000000; padding: 8px; font-size: 13px; text-align: center; }
+        td { border: 1px solid #000000; padding: 7px; font-size: 12px; text-align: center; color: #222; }
+        tr:nth-child(even) { background-color: #f2f8f8; }
+      </style>
+    </head>
+    <body>
+      <h2>جدول مشخصات دانش‌آموزان ثبت‌نام‌کننده در پژوهش سرای دانش‌آموزی رازی شهرستان دهگلان</h2>
+      <p style='text-align:center; font-size:12px; color:#555;'>تاریخ خروجی: ${new Date().toLocaleDateString('fa-IR')}</p>
+      <table>
+        <thead>
+          <tr>
+            <th>ردیف</th>
+            <th>کد رهگیری</th>
+            <th>نام و نام خانوادگی</th>
+            <th>کد ملی</th>
+            <th>شماره شاد</th>
+            <th>نام مدرسه</th>
+            <th>پایه تحصیلی</th>
+            <th>رشته تحصیلی</th>
+            <th>انجمن انتخابی</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    registrations.forEach((r, idx) => {
+      htmlContent += `
+          <tr>
+            <td>${idx + 1}</td>
+            <td><b>${r.id||'-'}</b></td>
+            <td>${r.fullName||'-'}</td>
+            <td>${r.nationalId||'-'}</td>
+            <td>${r.phone||'-'}</td>
+            <td>${r.school||'-'}</td>
+            <td>${r.grade||'-'}</td>
+            <td>${r.major||'-'}</td>
+            <td>${r.assoc||'-'}</td>
+          </tr>
+      `;
+    });
+
+    htmlContent += `
+        </tbody>
+      </table>
+    </body>
+    </html>
+    `;
+
+    var blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
+    var link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "DehgolanSRC_Registrations.doc";
+    link.click();
+  };
+})();
+</script>
+</body>
+</html>
