@@ -223,6 +223,16 @@
           <div><label>عنوان مقام / مدال کسب‌شده:</label><input type="text" id="stAward" placeholder="مثال: رتبه اول کشوری جشنواره جوان خوارزمی"></div>
           <div><label>سال تحصیلی:</label><input type="text" id="stYear" placeholder="مثال: سال تحصیلی ۱۴۰۳-۱۴۰۴"></div>
           <div class="full"><label>عنوان پروژه یا دست‌سازه علمی:</label><input type="text" id="stProject" placeholder="مثال: ساخت بیوپلاستیک از گیاهان دارویی دهگلان"></div>
+          <div class="full">
+            <label>عکس / فایل PDF / ویدیو افتخار (اختیاری):</label>
+            <input type="text" id="stMedia" placeholder="آدرس اینترنتی فایل (https://...)" dir="ltr" style="margin-bottom:8px;">
+            <div style="background:#fcfaf5; padding:12px; border-radius:10px; border:1.5px dashed #c9a24b;">
+              <label style="margin:0 0 6px 0; font-size:12.5px; color:#0d6e6e;">📤 یا آپلود مستقیم:</label>
+              <input type="file" id="stMediaFile" accept="image/*,video/*,.pdf">
+              <div class="hint">فرمت‌های مجاز: JPG, PNG, PDF, MP4, WebM – حداکثر ۱۰ مگابایت</div>
+            </div>
+            <div id="stMediaPreview" style="margin-top:10px; display:none; font-size:12.5px; color:#0d6e6e;"></div>
+          </div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;"><button class="btn gold" id="btnStSubmit">💾 ذخیره و انتشار افتخارات</button><button class="btn gray" id="btnStCancel" style="display:none;">✕ انصراف</button></div>
         <div class="msg" id="stMsg"></div>
@@ -260,7 +270,7 @@
         </div>
         <div class="table-responsive">
           <table class="reg-table">
-            <thead><tr><th>کد پیگیری</th><th>نام پژوهشگر</th><th>کد ملی</th><th>مدرسه</th><th>حوزه پژوهشی</th><th>عنوان اختراع / ایده</th><th>خلاصه طرح</th><th>تاریخ ارسال</th><th>حذف</th></tr></thead>
+            <thead><tr><th>کد پیگیری</th><th>نام پژوهشگر</th><th>کد ملی</th><th>مدرسه</th><th>حوزه پژوهشی</th><th>عنوان اختراع / ایده</th><th>خلاصه طرح</th><th>فایل ضمیمه</th><th>تاریخ ارسال</th><th>حذف</th></tr></thead>
             <tbody id="ideasTableBody"></tbody>
           </table>
         </div>
@@ -507,23 +517,115 @@
     }
   };
 
-  // Stars tab
+  // Stars tab - با پشتیبانی عکس/PDF/ویدیو
+  function getStarMediaType(url){
+    if(!url) return '';
+    url = url.toLowerCase();
+    if(url.match(/\.(mp4|webm|mov|avi)($|\?)/)) return 'video';
+    if(url.match(/\.pdf($|\?)/)) return 'pdf';
+    return 'image';
+  }
   function renderStarsList(){
     var wrap = $('starsWrap'); wrap.innerHTML = ''; if(!contentData.stars.length){ wrap.innerHTML='<p style="color:#888;">افتخاری نیست.</p>'; return; }
     contentData.stars.forEach((st, idx) => {
       var div = document.createElement('div'); div.className = 'item' + (editStIndex === idx ? ' editing' : '');
-      div.innerHTML = `<div class="tic">🏆</div><div class="tinfo"><b>${st.name} - ${st.award}</b><small>مدرسه: ${st.school} | پروژه: ${st.project}</small></div><div class="acts"><button class="btn sm gray" onclick="editSt(${idx})">✏️</button><button class="btn sm danger" onclick="delSt(${idx})">🗑</button></div>`;
+      var mediaIcon = '🏆';
+      if(st.media){
+        var mt = st.mediaType || getStarMediaType(st.media);
+        if(mt==='video') mediaIcon='🎬';
+        else if(mt==='pdf') mediaIcon='📄';
+        else mediaIcon = `<img src="${st.media}" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">`;
+      }
+      div.innerHTML = `<div class="tic" style="overflow:hidden;">${mediaIcon}</div><div class="tinfo"><b>${st.name} - ${st.award}</b><small>مدرسه: ${st.school} | پروژه: ${st.project}</small></div><div class="acts"><button class="btn sm gray" onclick="editSt(${idx})">✏️</button><button class="btn sm danger" onclick="delSt(${idx})">🗑</button></div>`;
       wrap.appendChild(div);
     });
   }
-  window.editSt = function(idx){ editStIndex = idx; var st = contentData.stars[idx]; $('stName').value = st.name; $('stSchool').value = st.school; $('stAward').value = st.award; $('stYear').value = st.year; $('stProject').value = st.project; $('stFormTitle').textContent = '✏️ ویرایش افتخار'; $('btnStCancel').style.display = 'inline-flex'; renderStarsList(); };
+  function updateStarMediaPreview(){
+    var url = $('stMedia').value.trim();
+    var preview = $('stMediaPreview');
+    if(!url){ preview.style.display='none'; preview.innerHTML=''; return; }
+    var mt = getStarMediaType(url);
+    var html = '';
+    if(mt==='image') html = `<img src="${url}" style="max-width:120px; max-height:80px; border-radius:8px; border:2px solid var(--gold);">`;
+    else if(mt==='video') html = '🎬 فایل ویدیو';
+    else if(mt==='pdf') html = '📄 فایل PDF';
+    else html = '📎 فایل ضمیمه';
+    preview.innerHTML = html + ` <button type="button" class="btn sm danger" onclick="clearStarMedia()" style="margin-right:8px;">حذف</button>`;
+    preview.style.display='block';
+  }
+  window.clearStarMedia = function(){
+    $('stMedia').value=''; $('stMediaFile').value=''; 
+    $('stMediaPreview').style.display='none'; $('stMediaPreview').innerHTML='';
+  };
+  if($('stMedia')) $('stMedia').addEventListener('input', updateStarMediaPreview);
+  if($('stMediaFile')) $('stMediaFile').addEventListener('change', function(e){
+    var f = e.target.files[0];
+    if(f){
+      var mt = f.type.startsWith('video') ? 'video' : f.type==='application/pdf' ? 'pdf' : 'image';
+      var txt = mt==='video' ? '🎬 ویدیو انتخاب شد: ' : mt==='pdf' ? '📄 PDF انتخاب شد: ' : '🖼️ عکس انتخاب شد: ';
+      $('stMediaPreview').innerHTML = txt + f.name + ` <button type="button" class="btn sm danger" onclick="clearStarMedia()" style="margin-right:8px;">حذف</button>`;
+      $('stMediaPreview').style.display='block';
+    }
+  });
+
+  window.editSt = function(idx){ 
+    editStIndex = idx; var st = contentData.stars[idx]; 
+    $('stName').value = st.name||''; $('stSchool').value = st.school||''; $('stAward').value = st.award||''; $('stYear').value = st.year||''; $('stProject').value = st.project||'';
+    $('stMedia').value = st.media||'';
+    $('stMediaFile').value='';
+    updateStarMediaPreview();
+    $('stFormTitle').textContent = '✏️ ویرایش افتخار'; $('btnStCancel').style.display = 'inline-flex'; renderStarsList();
+    window.scrollTo({top: $('stFormTitle').offsetTop - 80, behavior:'smooth'});
+  };
   window.delSt = function(idx){ if(confirm('حذف شود؟')){ contentData.stars.splice(idx,1); renderStarsList(); saveContentToGitHub('حذف افتخار', 'stMsg'); } };
-  $('btnStCancel').onclick = function(){ editStIndex = -1; $('stName').value=''; $('stSchool').value=''; $('stAward').value=''; $('stYear').value=''; $('stProject').value=''; $('stFormTitle').textContent = '➕ معرفی افتخار جدید'; $('btnStCancel').style.display='none'; renderStarsList(); };
+  $('btnStCancel').onclick = function(){ 
+    editStIndex = -1; 
+    $('stName').value=''; $('stSchool').value=''; $('stAward').value=''; $('stYear').value=''; $('stProject').value='';
+    clearStarMedia();
+    $('stFormTitle').textContent = '➕ معرفی افتخار جدید'; $('btnStCancel').style.display='none'; renderStarsList(); 
+  };
   $('btnStSubmit').onclick = function(){
     if(!$('stName').value.trim() || !$('stAward').value.trim()){ alert('نام و عنوان مقام الزامی است.'); return; }
-    var obj = { name: $('stName').value.trim(), school: $('stSchool').value.trim(), award: $('stAward').value.trim(), year: $('stYear').value.trim(), project: $('stProject').value.trim() };
-    if(editStIndex>=0) contentData.stars[editStIndex] = obj; else contentData.stars.unshift(obj);
-    renderStarsList(); saveContentToGitHub('بروزرسانی تالار افتخارات', 'stMsg'); $('btnStCancel').onclick();
+    
+    var mediaFileInput = $('stMediaFile');
+    var mediaUrl = $('stMedia').value.trim();
+
+    function saveStar(finalMediaUrl, mediaType){
+      var obj = { 
+        name: $('stName').value.trim(), 
+        school: $('stSchool').value.trim(), 
+        award: $('stAward').value.trim(), 
+        year: $('stYear').value.trim(), 
+        project: $('stProject').value.trim(),
+        media: finalMediaUrl || '',
+        mediaType: mediaType || ''
+      };
+      if(editStIndex>=0) contentData.stars[editStIndex] = obj; else contentData.stars.unshift(obj);
+      renderStarsList(); saveContentToGitHub('بروزرسانی تالار افتخارات', 'stMsg'); $('btnStCancel').onclick();
+    }
+
+    if(mediaFileInput.files && mediaFileInput.files.length){
+      if(!token){ alert('برای آپلود فایل ابتدا وارد پنل شوید.'); return; }
+      var file = mediaFileInput.files[0];
+      if(file.size > 10*1024*1024){ alert('حجم فایل نباید بیشتر از ۱۰ مگابایت باشد.'); return; }
+      show('stMsg','info','در حال آپلود فایل افتخار...');
+      var reader = new FileReader();
+      reader.onload = function(e){
+        var b64 = e.target.result.split(',')[1];
+        var filePath = 'files/stars/' + Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9.\-_]/g,'_');
+        var mt = file.type.startsWith('video') ? 'video' : file.type==='application/pdf' ? 'pdf' : 'image';
+        gh(filePath, { method: 'PUT', body: JSON.stringify({ message: 'آپلود فایل افتخار: ' + $('stName').value.trim(), content: b64 }) })
+        .then(r=>r.json()).then(res=>{
+          saveStar(filePath, mt);
+        }).catch(err => {
+          show('stMsg','err','خطا در آپلود: ' + err.message);
+        });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      var mt = getStarMediaType(mediaUrl);
+      saveStar(mediaUrl, mt);
+    }
   };
 
   // Registrations tab
@@ -566,10 +668,19 @@
   // --- تب ۶: ایده‌ها و اختراعات ارسالی ---
   function renderIdeasTable(){
     var tbody = $('ideasTableBody'); tbody.innerHTML = '';
-    if(!submittedIdeas.length){ tbody.innerHTML='<tr><td colspan="9" style="text-align:center;padding:25px;color:#888;">هیچ ایده یا اختراعی ثبت نشده است.</td></tr>'; return; }
+    if(!submittedIdeas.length){ tbody.innerHTML='<tr><td colspan="10" style="text-align:center;padding:25px;color:#888;">هیچ ایده یا اختراعی ثبت نشده است.</td></tr>'; return; }
     submittedIdeas.forEach((i, idx) => {
       var tr = document.createElement('tr');
-      tr.innerHTML = `<td><span class="badge" style="background:#fff8e1;color:#b78103;">${i.id||'-'}</span></td><td><b>${i.fullName||'-'}</b></td><td dir="ltr">${i.nationalId||'-'}</td><td>${i.school||'-'}</td><td style="color:#0d6e6e;"><b>${i.category||'-'}</b></td><td>${i.title||'-'}</td><td style="font-size:12.5px;max-width:260px;">${i.summary||'-'}</td><td>${i.date||'-'}</td><td><button class="btn sm danger" onclick="delIdea(${idx})">🗑</button></td>`;
+      var attachHtml = '-';
+      if(i.attachment){
+        var a = i.attachment;
+        var url = a.data || a.url || '#';
+        var name = a.name || 'دانلود فایل';
+        // اگر DataURL است، دانلود مستقیم
+        var downloadAttr = (url.startsWith('data:') ? ` download="${name}"` : ' target="_blank"');
+        attachHtml = `<a href="${url}"${downloadAttr} style="color:#0d6e6e;font-weight:700;white-space:nowrap;">📎 ${name.length>20 ? name.substring(0,20)+'…' : name}</a>`;
+      }
+      tr.innerHTML = `<td><span class="badge" style="background:#fff8e1;color:#b78103;">${i.id||'-'}</span></td><td><b>${i.fullName||'-'}</b></td><td dir="ltr">${i.nationalId||'-'}</td><td>${i.school||'-'}</td><td style="color:#0d6e6e;"><b>${i.category||'-'}</b></td><td>${i.title||'-'}</td><td style="font-size:12.5px;max-width:260px;">${i.summary||'-'}</td><td>${attachHtml}</td><td>${i.date||'-'}</td><td><button class="btn sm danger" onclick="delIdea(${idx})">🗑</button></td>`;
       tbody.appendChild(tr);
     });
   }
@@ -581,8 +692,8 @@
   };
   window.exportIdeasWord = function(){
     if(!submittedIdeas.length){ alert('ایده‌ای نیست.'); return; }
-    var html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'><title>ایده‌های پژوهشی</title><style>body{font-family:'Tahoma',sans-serif;direction:rtl;text-align:right;}table{width:100%;border-collapse:collapse;margin-top:20px;}th{background:#0d6e6e;color:#fff;border:1px solid #000;padding:8px;}td{border:1px solid #000;padding:7px;text-align:center;}</style></head><body><h2 style='text-align:center;color:#0d6e6e;'>صندوق ایده‌ها و اختراعات دانش‌آموزی پژوهش‌سرای رازی دهگلان</h2><table><thead><tr><th>ردیف</th><th>کد پیگیری</th><th>نام پژوهشگر</th><th>کد ملی</th><th>مدرسه</th><th>حوزه</th><th>عنوان ایده</th><th>خلاصه طرح</th></tr></thead><tbody>`;
-    submittedIdeas.forEach((i, idx) => { html += `<tr><td>${idx+1}</td><td><b>${i.id||'-'}</b></td><td>${i.fullName||'-'}</td><td>${i.nationalId||'-'}</td><td>${i.school||'-'}</td><td>${i.category||'-'}</td><td><b>${i.title||'-'}</b></td><td>${i.summary||'-'}</td></tr>`; });
+    var html = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'><head><meta charset='utf-8'><title>ایده‌های پژوهشی</title><style>body{font-family:'Tahoma',sans-serif;direction:rtl;text-align:right;}table{width:100%;border-collapse:collapse;margin-top:20px;}th{background:#0d6e6e;color:#fff;border:1px solid #000;padding:8px;}td{border:1px solid #000;padding:7px;text-align:center;}</style></head><body><h2 style='text-align:center;color:#0d6e6e;'>صندوق ایده‌ها و اختراعات دانش‌آموزی پژوهش‌سرای رازی دهگلان</h2><table><thead><tr><th>ردیف</th><th>کد پیگیری</th><th>نام پژوهشگر</th><th>کد ملی</th><th>مدرسه</th><th>حوزه</th><th>عنوان ایده</th><th>خلاصه طرح</th><th>فایل ضمیمه</th></tr></thead><tbody>`;
+    submittedIdeas.forEach((i, idx) => { var att = i.attachment ? (i.attachment.name || 'دارد') : 'ندارد'; html += `<tr><td>${idx+1}</td><td><b>${i.id||'-'}</b></td><td>${i.fullName||'-'}</td><td>${i.nationalId||'-'}</td><td>${i.school||'-'}</td><td>${i.category||'-'}</td><td><b>${i.title||'-'}</b></td><td>${i.summary||'-'}</td><td>${att}</td></tr>`; });
     html += `</tbody></table></body></html>`;
     var blob = new Blob(['\ufeff', html], { type: 'application/msword' }); var link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "DehgolanSRC_Ideas.doc"; link.click();
   };

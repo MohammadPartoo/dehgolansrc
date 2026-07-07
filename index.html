@@ -672,13 +672,19 @@
     <h3>💡 سامانه ارسال آنلاین ایده، پروپوزال و اختراع</h3>
     <p class="sub">ایده‌های شما مستقیماً توسط اساتید پژوهش‌سرا بررسی و جهت داوری خوارزمی هدایت می‌شوند</p>
     <form class="reg-form" id="ideaForm" onsubmit="handleIdeaSubmit(event)">
-      <div class="form-group"><label>👤 نام دانش‌آموز پژوهشگر / سرپرست تیم:</label><input type="text" id="iName" required placeholder="مثال: آرمین کریمی"></div>
+      <div class="form-group"><label>👤 نام دانش‌آموز پژوهشگر / سرپرست تیم:</label><input type="text" id="iName" required placeholder="محمد پرتوی"></div>
       <div class="form-group"><label>🔢 کد ملی (۱۰ رقم):</label><input type="text" id="iNatId" required maxlength="10" inputmode="numeric" pattern="[0-9]*" placeholder="3840123456" dir="ltr"></div>
-      <div class="form-group"><label>🏫 مدرسه محل تحصیل:</label><input type="text" id="iSchool" required placeholder="مثال: دبیرستان شهید بهشتی دهگلان"></div>
+      <div class="form-group"><label>🏫 مدرسه محل تحصیل:</label><input type="text" id="iSchool" required placeholder="دبیرستان نمونه دولتی خوارزمی"></div>
       <div class="form-group"><label>🔬 حوزه پژوهشی / انجمن مرتبط:</label><select id="iCat"><option value="هوش مصنوعی و رباتیک">هوش مصنوعی و رباتیک</option><option value="گیاهان دارویی و طب">گیاهان دارویی و طب</option><option value="زیست‌فناوری و نانو">زیست‌فناوری و نانو</option><option value="فیزیک و انرژی‌های نوین">فیزیک و انرژی‌های نوین</option><option value="شیمی و محیط زیست">شیمی و محیط زیست</option><option value="علوم انسانی و کارآفرینی">علوم انسانی و کارآفرینی</option></select></div>
       <div class="form-group full"><label>📌 عنوان طرح / ایده اختراع:</label><input type="text" id="iTitle" required placeholder="مثال: طراحی ربات هوشمند آبیار مزارع سیب‌زمینی"></div>
       <div class="form-group full"><label>📝 شرح مختصر ایده، کاربرد و نوآوری طرح (حداکثر ۵ سطر):</label><textarea id="iSummary" rows="4" required placeholder="خلاصه نحوه کارکرد ایده و مشکلی که حل می‌کند را بنویسید..."></textarea></div>
-      <div class="full" style="margin-top: 10px;"><button type="submit" class="btn-submit-reg">⚡ ارسال ایده جهت بررسی در پنل مدیریت</button></div>
+      <div class="form-group full">
+        <label>📎 فایل ضمیمه (PDF / عکس / ویدیو - اختیاری):</label>
+        <input type="file" id="iFile" accept=".pdf,image/*,video/*" style="padding:8px; background:#fffdf8; border:1.5px solid #d8cdb4; border-radius:10px;">
+        <small style="color:#777; font-size:11.5px;">حداکثر حجم: ۵ مگابایت - فرمت‌های مجاز: PDF, JPG, PNG, MP4, WebM</small>
+        <div id="iFilePreview" style="margin-top:8px; font-size:12.5px; color:#0d6e6e; display:none;"></div>
+      </div>
+      <div class="full" style="margin-top: 10px;"><button type="submit" class="btn-submit-reg" id="ideaSubmitBtn">⚡ ارسال ایده جهت بررسی در پنل مدیریت</button></div>
     </form>
   </div>
 </div>
@@ -745,17 +751,85 @@
     e.preventDefault();
     const natId = document.getElementById('iNatId').value.trim();
     if(natId.length !== 10){ alert('⚠️ خطا: کد ملی باید دقیقاً ۱۰ رقم باشد.'); return; }
-    const ideaId = 'IDEA-1405-' + Math.floor(1000 + Math.random()*9000);
-    const newIdea = {
-      id: ideaId, fullName: document.getElementById('iName').value.trim(), nationalId: natId,
-      school: document.getElementById('iSchool').value.trim(), category: document.getElementById('iCat').value,
-      title: document.getElementById('iTitle').value.trim(), summary: document.getElementById('iSummary').value.trim(), date: new Date().toLocaleDateString('fa-IR')
-    };
-    let ideas = []; try{ ideas = JSON.parse(localStorage.getItem('dehgolansrc_ideas')||'[]'); }catch(err){}
-    ideas.unshift(newIdea); localStorage.setItem('dehgolansrc_ideas', JSON.stringify(ideas));
-    alert('🎉 ایده و اختراع شما با موفقیت ثبت شد!\nکد پیگیری طرح: ' + ideaId + '\nاساتید پژوهش‌سرا در اسرع وقت طرح شما را بررسی و جهت هدایت تماس خواهند گرفت.');
-    closeIdeaModal(); document.getElementById('ideaForm').reset();
+
+    const btn = document.getElementById('ideaSubmitBtn');
+    const fileInput = document.getElementById('iFile');
+    const file = fileInput && fileInput.files[0] ? fileInput.files[0] : null;
+
+    // تابع ذخیره نهایی
+    function saveIdea(attachment){
+      const ideaId = 'IDEA-1405-' + Math.floor(1000 + Math.random()*9000);
+      const newIdea = {
+        id: ideaId,
+        fullName: document.getElementById('iName').value.trim(),
+        nationalId: natId,
+        school: document.getElementById('iSchool').value.trim(),
+        category: document.getElementById('iCat').value,
+        title: document.getElementById('iTitle').value.trim(),
+        summary: document.getElementById('iSummary').value.trim(),
+        date: new Date().toLocaleDateString('fa-IR'),
+        attachment: attachment || null
+      };
+      let ideas = []; try{ ideas = JSON.parse(localStorage.getItem('dehgolansrc_ideas')||'[]'); }catch(err){}
+      ideas.unshift(newIdea);
+      try {
+        localStorage.setItem('dehgolansrc_ideas', JSON.stringify(ideas));
+      } catch(err){
+        alert('⚠️ حجم فایل ضمیمه زیاد است و در حافظه مرورگر جا نشد. لطفا فایل کم‌حجم‌تری انتخاب کنید (زیر ۵ مگابایت).');
+        if(btn){ btn.disabled = false; btn.textContent = '⚡ ارسال ایده جهت بررسی در پنل مدیریت'; }
+        return;
+      }
+      alert('🎉 ایده و اختراع شما با موفقیت ثبت شد!\nکد پیگیری طرح: ' + ideaId + '\nاساتید پژوهش‌سرا در اسرع وقت طرح شما را بررسی و جهت هدایت تماس خواهند گرفت.');
+      closeIdeaModal();
+      document.getElementById('ideaForm').reset();
+      const preview = document.getElementById('iFilePreview');
+      if(preview){ preview.style.display='none'; preview.textContent=''; }
+      if(btn){ btn.disabled = false; btn.textContent = '⚡ ارسال ایده جهت بررسی در پنل مدیریت'; }
+    }
+
+    if(file){
+      if(file.size > 5 * 1024 * 1024){
+        alert('⚠️ حجم فایل نباید بیشتر از ۵ مگابایت باشد.');
+        return;
+      }
+      if(btn){ btn.disabled = true; btn.textContent = '⏳ در حال آپلود فایل...'; }
+      const reader = new FileReader();
+      reader.onload = function(ev){
+        const attachment = {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          data: ev.target.result
+        };
+        saveIdea(attachment);
+      };
+      reader.onerror = function(){
+        alert('خطا در خواندن فایل.');
+        if(btn){ btn.disabled = false; btn.textContent = '⚡ ارسال ایده جهت بررسی در پنل مدیریت'; }
+      };
+      reader.readAsDataURL(file);
+    } else {
+      saveIdea(null);
+    }
   }
+
+  // پیش‌نمایش فایل ضمیمه ایده
+  (function(){
+    const iFile = document.getElementById('iFile');
+    if(iFile){
+      iFile.addEventListener('change', function(){
+        const preview = document.getElementById('iFilePreview');
+        const f = this.files[0];
+        if(f){
+          preview.textContent = '📎 ' + f.name + ' (' + (f.size/1024/1024).toFixed(2) + ' MB)';
+          preview.style.display = 'block';
+        } else {
+          preview.style.display = 'none';
+          preview.textContent = '';
+        }
+      });
+    }
+  })();
 
   function updateLiveMemberCount() {
     fetch('registrations.json?v=' + Date.now()).then(r => r.json()).then(data => {
@@ -832,7 +906,39 @@
 
   function renderStars(list) {
     const grid = document.getElementById('starsGrid'); grid.innerHTML = '';
-    list.forEach(s => { const d = document.createElement('div'); d.className='star-card'; d.innerHTML=`<h4>${s.name}</h4><span class="school">🏫 ${s.school}</span><span class="award">🌟 ${s.award}</span><p><b>طرح:</b> ${s.project}</p><span class="year">${s.year}</span>`; grid.appendChild(d); });
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function getMediaType(url){
+      if(!url) return '';
+      url = url.toLowerCase();
+      if(url.match(/\.(mp4|webm|mov)($|\?)/)) return 'video';
+      if(url.match(/\.pdf($|\?)/)) return 'pdf';
+      return 'image';
+    }
+    list.forEach(s => { 
+      const d = document.createElement('div'); d.className='star-card';
+      let mediaHtml = '';
+      if(s.media){
+        const mt = s.mediaType || getMediaType(s.media);
+        if(mt==='image'){
+          mediaHtml = `<img src="${esc(s.media)}" alt="${esc(s.name)}" style="width:100%; max-height:220px; object-fit:cover; border-radius:12px; margin-bottom:12px; border:2px solid var(--gold); cursor:zoom-in;" class="zoomable" data-caption="${esc(s.name)}">`;
+        } else if(mt==='video'){
+          mediaHtml = `<video controls style="width:100%; border-radius:12px; margin-bottom:12px; background:#000;" src="${esc(s.media)}"></video>`;
+        } else if(mt==='pdf'){
+          mediaHtml = `<a href="${esc(s.media)}" target="_blank" style="display:block; background:#fbe9e7; color:#d84315; padding:8px 12px; border-radius:10px; font-weight:700; text-align:center; margin-bottom:12px; text-decoration:none;">📄 مشاهده فایل PDF مستندات</a>`;
+        }
+      }
+      d.innerHTML=`${mediaHtml}<h4>${esc(s.name)}</h4><span class="school">🏫 ${esc(s.school||'')}</span><span class="award">🌟 ${esc(s.award||'')}</span><p><b>طرح:</b> ${esc(s.project||'')}</p><span class="year">${esc(s.year||'')}</span>`; 
+      grid.appendChild(d); 
+    });
+    // re-bind lightbox for new images
+    document.querySelectorAll('#starsGrid img.zoomable').forEach((img, i) => {
+      img.addEventListener('click', () => {
+        const lb = document.getElementById('lightbox');
+        document.getElementById('lbImg').src = img.src;
+        document.getElementById('lbCaption').textContent = img.getAttribute('data-caption')||'تالار افتخارات';
+        lb.classList.add('open');
+      });
+    });
   }
 
   function renderContent() {
