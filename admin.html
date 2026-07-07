@@ -127,6 +127,7 @@
     
     <div class="admin-tabs">
       <button class="tab-btn active" id="tbContent" onclick="switchTab('content')">📚 آموزش مجازی و فایل‌ها</button>
+      <button class="tab-btn" id="tbVHub" onclick="switchTab('vhub')">🌐 پردیس فناوری</button>
       <button class="tab-btn" id="tbSchedule" onclick="switchTab('schedule')">📅 تقویم کارگاه‌ها</button>
       <button class="tab-btn" id="tbMentors" onclick="switchTab('mentors')">👨‍🏫 اساتید راهنما</button>
       <button class="tab-btn" id="tbStars" onclick="switchTab('stars')">🏆 تالار افتخارات</button>
@@ -165,8 +166,69 @@
       <div class="card"><h2>📚 محتواهای فعال در سایت</h2><div id="listWrap"></div></div>
     </div>
 
+
+    <!-- ================== تب پردیس فناوری ================== -->
+    <div id="secVHub" style="display:none;">
+      
+      <!-- آزمایشگاه مجازی -->
+      <div class="card">
+        <h2 id="vlFormTitle">➕ افزودن شبیه‌ساز آزمایشگاه مجازی</h2>
+        <div class="form-grid">
+          <div class="full"><label>عنوان آزمایش:</label><input type="text" id="vlTitle" placeholder="مثال: ⚡ شبیه‌ساز مدار الکتریسیته"></div>
+          <div class="full"><label>توضیحات:</label><textarea id="vlDesc" rows="2" placeholder="توضیح کوتاه..."></textarea></div>
+          <div><label>آدرس شبیه‌ساز (URL):</label><input type="text" id="vlUrl" placeholder="https://..." dir="ltr"></div>
+          <div><label>متن دکمه:</label><input type="text" id="vlBtn" placeholder="🚀 ورود به شبیه‌ساز"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;"><button class="btn gold" id="btnVlSubmit">💾 ذخیره آزمایشگاه</button><button class="btn gray" id="btnVlCancel" style="display:none;">✕ انصراف</button></div>
+        <div class="msg" id="vlMsg"></div>
+      </div>
+      <div class="card"><h2>🧪 آزمایشگاه‌های مجازی فعال</h2><div id="vlabWrap"></div></div>
+
+      <!-- بانک ایده -->
+      <div class="card">
+        <h2 id="ibFormTitle">➕ افزودن موضوع به بانک ایده خوارزمی</h2>
+        <div class="form-grid">
+          <div><label>دسته / حوزه:</label><input type="text" id="ibCat" placeholder="مثال: 🤖 هوش مصنوعی و رباتیک"></div>
+          <div><label>عنوان ایده:</label><input type="text" id="ibTitle" placeholder="عنوان موضوع پیشنهادی"></div>
+          <div class="full"><label>توضیحات:</label><textarea id="ibDesc" rows="2"></textarea></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;"><button class="btn gold" id="btnIbSubmit">💾 ذخیره ایده</button><button class="btn gray" id="btnIbCancel" style="display:none;">✕ انصراف</button></div>
+        <div class="msg" id="ibMsg"></div>
+      </div>
+      <div class="card"><h2>💡 بانک موضوعات خوارزمی</h2><div id="ideasBankWrap"></div></div>
+
+      <!-- کتابخانه -->
+      <div class="card">
+        <h2 id="lbFormTitle">➕ افزودن منبع به کتابخانه المپیاد</h2>
+        <div class="form-grid">
+          <div><label>عنوان کتاب / جزوه:</label><input type="text" id="lbTitle"></div>
+          <div><label>نویسنده / ناشر:</label><input type="text" id="lbAuthor"></div>
+          <div><label>فرمت:</label><input type="text" id="lbFormat" placeholder="PDF / کتاب الکترونیک"></div>
+          <div><label>آدرس دانلود:</label><input type="text" id="lbUrl" dir="ltr" placeholder="https://..."></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;"><button class="btn gold" id="btnLbSubmit">💾 ذخیره منبع</button><button class="btn gray" id="btnLbCancel" style="display:none;">✕ انصراف</button></div>
+        <div class="msg" id="lbMsg"></div>
+      </div>
+      <div class="card"><h2>📚 کتابخانه مرجع المپیاد</h2><div id="libraryWrap"></div></div>
+
+      <!-- پادکست -->
+      <div class="card">
+        <h2 id="pcFormTitle">➕ افزودن پادکست رادیو پژوهش‌سرا</h2>
+        <div class="form-grid">
+          <div class="full"><label>عنوان پادکست:</label><input type="text" id="pcTitle"></div>
+          <div><label>ارائه‌دهنده:</label><input type="text" id="pcSpeaker"></div>
+          <div><label>مدت زمان:</label><input type="text" id="pcDuration" placeholder="مثال: ۷ دقیقه"></div>
+          <div class="full"><label>آدرس فایل صوتی (MP3 URL):</label><input type="text" id="pcAudio" dir="ltr" placeholder="https://..."></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;"><button class="btn gold" id="btnPcSubmit">💾 ذخیره پادکست</button><button class="btn gray" id="btnPcCancel" style="display:none;">✕ انصراف</button></div>
+        <div class="msg" id="pcMsg"></div>
+      </div>
+      <div class="card"><h2>🎙️ پادکست‌های رادیو پژوهش‌سرا</h2><div id="podcastWrap"></div></div>
+
+    </div>
     <!-- ================== تب ۲: تقویم کارگاه‌ها ================== -->
     <div id="secSchedule" style="display:none;">
+
       <div class="card">
         <h2 id="scFormTitle">➕ افزودن کارگاه جدید به تقویم هفتگی</h2>
         <div class="form-grid">
@@ -290,7 +352,7 @@
   var token = '';
   
   var contentSha = null;
-  var contentData = { items: [], schedule: [], mentors: [], stars: [], ideasBank: [], library: [], podcasts: [] };
+  var contentData = { items: [], schedule: [], mentors: [], stars: [], ideasBank: [], library: [], podcasts: [], vlabs: [] };
   var editIndex = -1; var editScIndex = -1; var editMIndex = -1; var editStIndex = -1;
 
   var regsSha = null; var registrations = [];
@@ -310,7 +372,7 @@
   if(savedToken) $('ghToken').value = savedToken;
 
   window.switchTab = function(t){
-    ['Content', 'Schedule', 'Mentors', 'Stars', 'Regs', 'Ideas'].forEach(id => {
+    ['Content', 'VHub', 'Schedule', 'Mentors', 'Stars', 'Regs', 'Ideas'].forEach(id => {
       $('tb' + id).classList.remove('active'); $('sec' + id).style.display = 'none';
     });
     if(t === 'content'){ $('tbContent').classList.add('active'); $('secContent').style.display = 'block'; }
@@ -318,6 +380,7 @@
     else if(t === 'mentors'){ $('tbMentors').classList.add('active'); $('secMentors').style.display = 'block'; renderMentorsList(); }
     else if(t === 'stars'){ $('tbStars').classList.add('active'); $('secStars').style.display = 'block'; renderStarsList(); }
     else if(t === 'regs'){ $('tbRegs').classList.add('active'); $('secRegs').style.display = 'block'; populateSchoolFilter(); renderRegsTable(); }
+    else if(t === 'vhub'){ $('tbVHub').classList.add('active'); $('secVHub').style.display = 'block'; renderVLabList(); renderIdeasBankList(); renderLibraryList(); renderPodcastList(); }
     else if(t === 'ideas'){ $('tbIdeas').classList.add('active'); $('secIdeas').style.display = 'block'; renderIdeasTable(); }
   };
 
@@ -627,6 +690,75 @@
       saveStar(mediaUrl, mt);
     }
   };
+
+
+  // ================== تب پردیس فناوری ==================
+  var editVlIndex = -1, editIbIndex = -1, editLbIndex = -1, editPcIndex = -1;
+
+  // VLab
+  function renderVLabList(){
+    var wrap = $('vlabWrap'); if(!wrap) return; wrap.innerHTML = '';
+    var list = contentData.vlabs || (contentData.vlabs=[]);
+    if(!list.length){ wrap.innerHTML='<p style="color:#888;">آزمایشی نیست.</p>'; return; }
+    list.forEach((v, idx) => {
+      var div = document.createElement('div'); div.className='item' + (editVlIndex===idx?' editing':'');
+      div.innerHTML = `<div class="tic">🧪</div><div class="tinfo"><b>${v.title}</b><small dir="ltr">${v.url}</small></div><div class="acts"><button class="btn sm gray" onclick="editVl(${idx})">✏️</button><button class="btn sm danger" onclick="delVl(${idx})">🗑</button></div>`;
+      wrap.appendChild(div);
+    });
+  }
+  window.editVl = function(idx){ editVlIndex = idx; var v = contentData.vlabs[idx]; $('vlTitle').value=v.title||''; $('vlDesc').value=v.desc||''; $('vlUrl').value=v.url||''; $('vlBtn').value=v.btn||''; $('vlFormTitle').textContent='✏️ ویرایش آزمایشگاه'; $('btnVlCancel').style.display='inline-flex'; renderVLabList(); };
+  window.delVl = function(idx){ if(confirm('حذف شود؟')){ contentData.vlabs.splice(idx,1); renderVLabList(); saveContentToGitHub('حذف آزمایشگاه مجازی','vlMsg'); } };
+  $('btnVlCancel').onclick = function(){ editVlIndex=-1; $('vlTitle').value=''; $('vlDesc').value=''; $('vlUrl').value=''; $('vlBtn').value=''; $('vlFormTitle').textContent='➕ افزودن شبیه‌ساز آزمایشگاه مجازی'; $('btnVlCancel').style.display='none'; renderVLabList(); };
+  $('btnVlSubmit').onclick = function(){ if(!$('vlTitle').value.trim()|| !$('vlUrl').value.trim()){ alert('عنوان و آدرس الزامی است.'); return; } var obj={title:$('vlTitle').value.trim(), desc:$('vlDesc').value.trim(), url:$('vlUrl').value.trim(), btn:$('vlBtn').value.trim()||'🚀 ورود به شبیه‌ساز'}; if(editVlIndex>=0) contentData.vlabs[editVlIndex]=obj; else { if(!contentData.vlabs) contentData.vlabs=[]; contentData.vlabs.push(obj);} renderVLabList(); saveContentToGitHub('بروزرسانی آزمایشگاه مجازی','vlMsg'); $('btnVlCancel').onclick(); };
+
+  // IdeasBank
+  function renderIdeasBankList(){
+    var wrap = $('ideasBankWrap'); if(!wrap) return; wrap.innerHTML='';
+    var list = contentData.ideasBank || (contentData.ideasBank=[]);
+    if(!list.length){ wrap.innerHTML='<p style="color:#888;">موضوعی نیست.</p>'; return; }
+    list.forEach((it, idx)=>{
+      var div=document.createElement('div'); div.className='item'+(editIbIndex===idx?' editing':'');
+      div.innerHTML=`<div class="tic">💡</div><div class="tinfo"><b>${it.title}</b><small>${it.cat||''}</small></div><div class="acts"><button class="btn sm gray" onclick="editIb(${idx})">✏️</button><button class="btn sm danger" onclick="delIb(${idx})">🗑</button></div>`;
+      wrap.appendChild(div);
+    });
+  }
+  window.editIb=function(idx){ editIbIndex=idx; var it=contentData.ideasBank[idx]; $('ibCat').value=it.cat||''; $('ibTitle').value=it.title||''; $('ibDesc').value=it.desc||''; $('ibFormTitle').textContent='✏️ ویرایش موضوع'; $('btnIbCancel').style.display='inline-flex'; renderIdeasBankList(); };
+  window.delIb=function(idx){ if(confirm('حذف شود؟')){ contentData.ideasBank.splice(idx,1); renderIdeasBankList(); saveContentToGitHub('حذف ایده بانک','ibMsg'); } };
+  $('btnIbCancel').onclick=function(){ editIbIndex=-1; $('ibCat').value=''; $('ibTitle').value=''; $('ibDesc').value=''; $('ibFormTitle').textContent='➕ افزودن موضوع به بانک ایده خوارزمی'; $('btnIbCancel').style.display='none'; renderIdeasBankList(); };
+  $('btnIbSubmit').onclick=function(){ if(!$('ibTitle').value.trim()){ alert('عنوان الزامی است.'); return; } var obj={cat:$('ibCat').value.trim(), title:$('ibTitle').value.trim(), desc:$('ibDesc').value.trim()}; if(editIbIndex>=0) contentData.ideasBank[editIbIndex]=obj; else contentData.ideasBank.push(obj); renderIdeasBankList(); saveContentToGitHub('بروزرسانی بانک ایده','ibMsg'); $('btnIbCancel').onclick(); };
+
+  // Library
+  function renderLibraryList(){
+    var wrap=$('libraryWrap'); if(!wrap) return; wrap.innerHTML='';
+    var list=contentData.library || (contentData.library=[]);
+    if(!list.length){ wrap.innerHTML='<p style="color:#888;">کتابی نیست.</p>'; return; }
+    list.forEach((it, idx)=>{
+      var div=document.createElement('div'); div.className='item'+(editLbIndex===idx?' editing':'');
+      div.innerHTML=`<div class="tic">📚</div><div class="tinfo"><b>${it.title}</b><small>${it.author||''} | ${it.format||''}</small></div><div class="acts"><button class="btn sm gray" onclick="editLb(${idx})">✏️</button><button class="btn sm danger" onclick="delLb(${idx})">🗑</button></div>`;
+      wrap.appendChild(div);
+    });
+  }
+  window.editLb=function(idx){ editLbIndex=idx; var it=contentData.library[idx]; $('lbTitle').value=it.title||''; $('lbAuthor').value=it.author||''; $('lbFormat').value=it.format||''; $('lbUrl').value=it.url||''; $('lbFormTitle').textContent='✏️ ویرایش منبع'; $('btnLbCancel').style.display='inline-flex'; renderLibraryList(); };
+  window.delLb=function(idx){ if(confirm('حذف شود؟')){ contentData.library.splice(idx,1); renderLibraryList(); saveContentToGitHub('حذف منبع کتابخانه','lbMsg'); } };
+  $('btnLbCancel').onclick=function(){ editLbIndex=-1; $('lbTitle').value=''; $('lbAuthor').value=''; $('lbFormat').value=''; $('lbUrl').value=''; $('lbFormTitle').textContent='➕ افزودن منبع به کتابخانه المپیاد'; $('btnLbCancel').style.display='none'; renderLibraryList(); };
+  $('btnLbSubmit').onclick=function(){ if(!$('lbTitle').value.trim()){ alert('عنوان الزامی است.'); return; } var obj={title:$('lbTitle').value.trim(), author:$('lbAuthor').value.trim(), format:$('lbFormat').value.trim(), url:$('lbUrl').value.trim()}; if(editLbIndex>=0) contentData.library[editLbIndex]=obj; else contentData.library.push(obj); renderLibraryList(); saveContentToGitHub('بروزرسانی کتابخانه','lbMsg'); $('btnLbCancel').onclick(); };
+
+  // Podcast
+  function renderPodcastList(){
+    var wrap=$('podcastWrap'); if(!wrap) return; wrap.innerHTML='';
+    var list=contentData.podcasts || (contentData.podcasts=[]);
+    if(!list.length){ wrap.innerHTML='<p style="color:#888;">پادکستی نیست.</p>'; return; }
+    list.forEach((it, idx)=>{
+      var div=document.createElement('div'); div.className='item'+(editPcIndex===idx?' editing':'');
+      div.innerHTML=`<div class="tic">🎙️</div><div class="tinfo"><b>${it.title}</b><small>${it.speaker||''} | ${it.duration||''}</small></div><div class="acts"><button class="btn sm gray" onclick="editPc(${idx})">✏️</button><button class="btn sm danger" onclick="delPc(${idx})">🗑</button></div>`;
+      wrap.appendChild(div);
+    });
+  }
+  window.editPc=function(idx){ editPcIndex=idx; var it=contentData.podcasts[idx]; $('pcTitle').value=it.title||''; $('pcSpeaker').value=it.speaker||''; $('pcDuration').value=it.duration||''; $('pcAudio').value=it.audioUrl||''; $('pcFormTitle').textContent='✏️ ویرایش پادکست'; $('btnPcCancel').style.display='inline-flex'; renderPodcastList(); };
+  window.delPc=function(idx){ if(confirm('حذف شود؟')){ contentData.podcasts.splice(idx,1); renderPodcastList(); saveContentToGitHub('حذف پادکست','pcMsg'); } };
+  $('btnPcCancel').onclick=function(){ editPcIndex=-1; $('pcTitle').value=''; $('pcSpeaker').value=''; $('pcDuration').value=''; $('pcAudio').value=''; $('pcFormTitle').textContent='➕ افزودن پادکست رادیو پژوهش‌سرا'; $('btnPcCancel').style.display='none'; renderPodcastList(); };
+  $('btnPcSubmit').onclick=function(){ if(!$('pcTitle').value.trim()){ alert('عنوان الزامی است.'); return; } var obj={title:$('pcTitle').value.trim(), speaker:$('pcSpeaker').value.trim(), duration:$('pcDuration').value.trim(), audioUrl:$('pcAudio').value.trim()}; if(editPcIndex>=0) contentData.podcasts[editPcIndex]=obj; else contentData.podcasts.push(obj); renderPodcastList(); saveContentToGitHub('بروزرسانی پادکست‌ها','pcMsg'); $('btnPcCancel').onclick(); };
+
 
   // Registrations tab
   function populateSchoolFilter(){

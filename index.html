@@ -482,28 +482,11 @@
     <!-- پنل ۱: آزمایشگاه مجازی -->
     <div class="vhub-panel active" id="vpanel-vlab">
       <p style="text-align:center; color:#555; margin-bottom:25px;">با استفاده از شبیه‌سازهای تعاملی زیر، آزمایش‌های جذاب علوم، فیزیک، شیمی و نجوم را بدون خطر و به صورت مجازی تجربه کنید:</p>
-      <div class="vlab-grid">
-        <div class="vlab-card">
-          <div>
-            <h4>⚡ شبیه‌ساز مدار الکتریسیته و قانون اهم</h4>
-            <p>بستن مجازی مدارهای سری و موازی، قراردادن باتری، مقاومت و روشن کردن لامپ همراه با اندازه‌گیری ولتاژ و جریان.</p>
-          </div>
-          <a href="https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_fa.html" target="_blank" class="c-btn">🚀 ورود به شبیه‌ساز مدار برق ❬</a>
-        </div>
-        <div class="vlab-card">
-          <div>
-            <h4>🧪 شبیه‌ساز اسید، باز و مقیاس pH</h4>
-            <p>بررسی خاصیت اسیدی و قلیایی محلول‌های مختلف، سنجش رنگی با کاغذ شناساگر و مشاهده غلظت یون‌ها.</p>
-          </div>
-          <a href="https://phet.colorado.edu/sims/html/ph-scale/latest/ph-scale_fa.html" target="_blank" class="c-btn">🧪 ورود به آزمایشگاه اسید و باز ❬</a>
-        </div>
-        <div class="vlab-card">
-          <div>
-            <h4>🔭 شبیه‌ساز رصد و جاذبه منظومه شمسی</h4>
-            <p>بررسی مدار چرخش سیارات به دور خورشید، تأثیر گرانش در فضا و مشاهده قوانین حرکت کپلر در آسمان.</p>
-          </div>
-          <a href="https://phet.colorado.edu/sims/html/gravity-and-orbits/latest/gravity-and-orbits_fa.html" target="_blank" class="c-btn">🔭 ورود به رصدخانه منظومه شمسی ❬</a>
-        </div>
+          <!-- پنل ۱: آزمایشگاه مجازی -->
+    <div class="vhub-panel active" id="vpanel-vlab">
+      <p style="text-align:center; color:#555; margin-bottom:25px;">با استفاده از شبیه‌سازهای تعاملی زیر، آزمایش‌های جذاب علوم، فیزیک، شیمی و نجوم را بدون خطر و به صورت مجازی تجربه کنید:</p>
+      <div class="vlab-grid" id="vlabGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:25px;color:#888;">⏳ در حال بارگذاری آزمایشگاه…</div>
       </div>
     </div>
 
@@ -864,8 +847,18 @@
     fetch('content.json?v=' + Date.now()).then(r => r.json()).then(data => {
       allItems = data.items || []; renderContent();
       renderMentors(data.mentors || []); renderSchedule(data.schedule || []); renderStars(data.stars || []);
-      renderIdeasBank(data.ideasBank || []); renderLibrary(data.library || []); renderPodcasts(data.podcasts || []);
+      renderVlabs(data.vlabs || []); renderIdeasBank(data.ideasBank || []); renderLibrary(data.library || []); renderPodcasts(data.podcasts || []);
     }).catch(()=>{});
+  }
+
+  function renderVlabs(list) {
+    const grid = document.getElementById('vlabGrid'); if(!grid) return; grid.innerHTML = '';
+    if(!list.length){ grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:25px;color:#888;">آزمایشی ثبت نشده است.</div>'; return; }
+    list.forEach(v => {
+      const d = document.createElement('div'); d.className='vlab-card';
+      d.innerHTML = `<div><h4>${v.title||''}</h4><p>${v.desc||''}</p></div><a href="${v.url||'#'}" target="_blank" class="c-btn">${v.btn||'🚀 ورود به شبیه‌ساز'} ❬</a>`;
+      grid.appendChild(d);
+    });
   }
 
   function renderIdeasBank(list) {
