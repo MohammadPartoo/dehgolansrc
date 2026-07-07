@@ -693,7 +693,7 @@
   <div class="footer-grid">
     <div class="footer-col"><h4>درباره پژوهش سرای رازی دهگلان</h4><p>پژوهش سرای دانش‌آموزی رازی، وابسته به مدیریت آموزش و پرورش شهرستان دهگلان، قطب علمی استعدادیابی و پرورش خلاقیت‌های دانش‌آموزان است.</p></div>
     <div class="footer-col"><h4>پیوندهای سریع</h4><ul class="footer-links"><li><a href="#" onclick="openRegModal();return false;">📝 ثبت‌نام در پژوهش‌سرا</a></li><li><a href="#" onclick="openIdeaModal();return false;">💡 ارسال آنلاین اختراع</a></li><li><a href="#virtual-hub">🧪 آزمایشگاه مجازی</a></li><li><a href="#idcard">🪪 کارت شناسایی دیجیتال</a></li></ul></div>
-    <div class="footer-col"><h4>تماس با ما</h4><ul class="footer-contact"><li>📍 <b>آدرس:</b> شهرستان دهگلان، پژوهش سرای دانش‌آموزی رازی</li><li>📞 <b>تلفن:</b> ۰۸۷-۳۵۱۸۰۰۰۰</li><li>💬 <b>کانال شاد:</b> DehgolanSRC@</li></ul></div>
+    <div class="footer-col"><h4>تماس با ما</h4><ul class="footer-contact"><li>📍 <b>آدرس:</b> دهگلان، انتهای خیابان اورژانس، روبه‌روی مرکز فنی و حرفه‌ای – پژوهش سرای دانش‌آموزی رازی دهگلان</li><li>📞 <b>تلفن:</b> ۰۸۷-۳۵۱۸۰۰۰۰</li><li>💬 <b>کانال شاد:</b> DehgolanSRC@</li></ul></div>
   </div>
   <div class="footer-bottom"><p>کلیه حقوق متعلق به <b>پژوهش سرای دانش‌آموزی رازی شهرستان دهگلان</b> می‌باشد.</p></div>
 </footer>
@@ -814,7 +814,15 @@
 
   function renderMentors(list) {
     const grid = document.getElementById('mentorsGrid'); grid.innerHTML = '';
-    list.forEach(m => { const d = document.createElement('div'); d.className='mentor-card'; d.innerHTML=`<div class="mentor-avatar">👨‍🏫</div><h4>${m.name}</h4><span class="role">${m.role}</span><span class="edu">${m.edu}</span><p>${m.desc}</p>`; grid.appendChild(d); });
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    list.forEach(m => { 
+      const d = document.createElement('div'); d.className='mentor-card';
+      const photoHtml = m.photo 
+        ? `<img src="${esc(m.photo)}" alt="${esc(m.name)}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 16px;display:block;border:3px solid #fff;box-shadow:0 4px 12px rgba(13,110,110,0.2);">`
+        : `<div class="mentor-avatar">👨‍🏫</div>`;
+      d.innerHTML=`${photoHtml}<h4>${esc(m.name)}</h4><span class="role">${esc(m.role||'')}</span><span class="edu">${esc(m.edu||'')}</span><p>${esc(m.desc||'')}</p>`; 
+      grid.appendChild(d); 
+    });
   }
 
   function renderSchedule(list) {

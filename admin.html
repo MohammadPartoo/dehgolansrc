@@ -105,17 +105,17 @@
 
 <header>
   <h1>🛠 پنل مدیریت جامع و یکپارچه پژوهش سرای رازی دهگلان</h1>
-    <p>مدیریت محتوا، تقویم کارگاه‌ها، اساتید، افتخارات، دانش‌آموزان و اختراعات</p>
+  <p>مدیریت محتوا، تقویم کارگاه‌ها، اساتید، افتخارات، دانش‌آموزان و اختراعات</p>
   <a href="index.html" class="back-link">🏠 مشاهده سایت اصلی (پیش‌نمایش زنده)</a>
 </header>
 
 <div class="wrap">
 
-  <!-- لاگین / توکن گیت‌هاب -->
+  <!-- لاگین مدیر -->
   <div class="card" id="cardLogin">
     <h2>🔑 ورود مدیر</h2>
-    <label>رمز ورد</label>
-    <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" dir="ltr">
+    <label>رمز ورود:</label>
+    <input type="password" id="ghToken" placeholder="رمز ورود مدیر را وارد کنید" dir="ltr">
     <div style="display:flex; gap:10px; flex-wrap:wrap;">
       <button class="btn" id="btnLogin">⚡ ورود به پنل مدیریت</button>
     </div>
@@ -151,7 +151,7 @@
         <label id="lblUrl">آدرس (URL) پیوند یا ویدیو:</label>
         <input type="text" id="fUrl" placeholder="https://..." dir="ltr">
         <div id="fileUploadWrap" style="display:none; margin-top:12px; background:#fcfaf5; padding:15px; border-radius:12px; border:2px dashed #c9a24b;">
-          <label style="margin-top:0; color:#0d6e6e;">📤 آپلود مستقیم فایل روی سرور گیت‌هاب (پوشه files):</label>
+          <label style="margin-top:0; color:#0d6e6e;">📤 آپلود مستقیم فایل (پوشه files):</label>
           <input type="file" id="fFile">
         </div>
         <label>توضیحات کوتاه:</label>
@@ -193,6 +193,19 @@
           <div><label>مسئولیت / عنوان:</label><input type="text" id="mRole" placeholder="مثال: مدیر پژوهش‌سرا و مدرس زیست‌فناوری"></div>
           <div class="full"><label>مدرک تحصیلی / تخصص:</label><input type="text" id="mEdu" placeholder="مثال: دکترای تخصصی بیوتکنولوژی"></div>
           <div class="full"><label>توضیحات و زمینه‌های هدایت طرح‌ها:</label><textarea id="mDesc" rows="3" placeholder="توضیحات مشاوره المپیاد، خوارزمی و..."></textarea></div>
+          <div class="full">
+            <label>تصویر استاد / مربی (اختیاری):</label>
+            <input type="text" id="mPhoto" placeholder="آدرس اینترنتی عکس (https://...)" dir="ltr" style="margin-bottom:8px;">
+            <div style="background:#fcfaf5; padding:12px; border-radius:10px; border:1.5px dashed #c9a24b;">
+              <label style="margin:0 0 6px 0; font-size:12.5px; color:#0d6e6e;">📤 یا آپلود مستقیم عکس:</label>
+              <input type="file" id="mPhotoFile" accept="image/*">
+              <div class="hint">فرمت‌های مجاز: JPG, PNG, WebP - حداکثر ۲ مگابایت</div>
+            </div>
+            <div id="mPhotoPreview" style="margin-top:10px; display:none;">
+              <img id="mPhotoPreviewImg" src="" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);">
+              <button type="button" class="btn sm danger" onclick="clearMentorPhoto()" style="margin-right:8px; vertical-align:top;">حذف عکس</button>
+            </div>
+          </div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;"><button class="btn gold" id="btnMSubmit">💾 ذخیره و انتشار اساتید</button><button class="btn gray" id="btnMCancel" style="display:none;">✕ انصراف</button></div>
         <div class="msg" id="mMsg"></div>
@@ -224,7 +237,7 @@
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:18px; background:#f8f6f0; padding:15px; border-radius:14px; border:1px solid #e0d5bd;">
           <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:240px;"><span style="font-size:18px;">🔍</span><input type="text" id="regSearchInput" placeholder="جستجو نام، کد ملی یا رشته..." style="margin:0; padding:8px 14px;"></div>
           <div><select id="schoolFilterSelect" style="padding:8px 14px; width:220px;"><option value="">🏫 فیلتر همه مدارس شهرستان</option></select></div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;"><button class="btn word sm" onclick="exportToWord()">📄 خروجی ورد (.doc)</button><button class="btn excel sm" onclick="exportToExcel()">📊 خروجی اکسل (.csv)</button><button class="btn gold sm" onclick="saveRegsToGitHub()">☁️ ذخیره روی گیت‌هاب</button></div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;"><button class="btn word sm" onclick="exportToWord()">📄 خروجی ورد (.doc)</button><button class="btn excel sm" onclick="exportToExcel()">📊 خروجی اکسل (.csv)</button><button class="btn gold sm" onclick="saveRegsToGitHub()">☁️ ذخیره در سایت</button></div>
         </div>
         <div class="table-responsive">
           <table class="reg-table">
@@ -243,7 +256,7 @@
         <p style="font-size:13.5px; color:#555; margin-bottom:16px;">این بخش شامل تمامی ایده‌ها و پروپوزال‌های پژوهشی است که دانش‌آموزان جهت شرکت در مسابقات خوارزمی و کاظمی آشتیانی ارسال کرده‌اند. می‌توانید آن‌ها را بررسی، هدایت یا حذف کنید.</p>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
           <button class="btn word sm" onclick="exportIdeasWord()">📄 خروجی ورد ایده‌ها (.doc)</button>
-          <button class="btn gold sm" onclick="saveIdeasToGitHub()">☁️ ذخیره ایده‌ها روی گیت‌هاب</button>
+          <button class="btn gold sm" onclick="saveIdeasToGitHub()">☁️ ذخیره ایده‌ها در سایت</button>
         </div>
         <div class="table-responsive">
           <table class="reg-table">
@@ -300,13 +313,12 @@
 
   $('btnLogin').onclick = function(){
     token = $('ghToken').value.trim();
-    if(!token){ show('loginMsg','err','لطفاً توکن گیت‌هاب را وارد کنید.'); return; }
+    if(!token){ show('loginMsg','err','لطفاً رمز ورود را وارد کنید.'); return; }
     loadAllData();
   };
-  $('btnOfflineLogin').onclick = loadOfflineData;
 
   function loadAllData(){
-    show('loginMsg','info','در حال اتصال به سایت پژوهش سرای دانش‌آموزی...');
+    show('loginMsg','info','در حال اتصال به سایت پژوهش سرای دانش آموزی ...');
     gh('content.json?ref=main').then(r => r.ok ? r.json() : null).then(data => {
       if(data){ contentSha = data.sha; try{ var parsed = JSON.parse(b64DecodeUnicode(data.content)); Object.assign(contentData, parsed); }catch(e){} }
       return gh('registrations.json?ref=main');
@@ -316,15 +328,16 @@
     }).then(r => r && r.ok ? r.json() : null).then(data => {
       if(data){ ideasSha = data.sha; try{ submittedIdeas = JSON.parse(b64DecodeUnicode(data.content)).ideas || []; }catch(e){} }
       mergeLocalRegsAndIdeas(); localStorage.setItem('gh_token_dehgolansrc', token);
-      show('loginMsg','ok','✅ اتصال برقرار شد و تمام پایگاه‌های داده بارگذاری گردید.');
+      // مخفی کردن کارت ورود و نمایش پنل
+      $('cardLogin').style.display = 'none';
       $('mainPanel').style.display = 'block'; renderList();
-    }).catch(e => { show('loginMsg','err','❌ خطا: ' + e.message); loadOfflineData(); });
+    }).catch(e => { show('loginMsg','err','❌ خطا در اتصال: ' + e.message); });
   }
 
   function loadOfflineData(){
     fetch('content.json').then(r => r.json()).then(d => { Object.assign(contentData, d); renderList(); }).catch(()=>{});
     fetch('registrations.json').then(r => r.json()).then(d => { registrations = d.registrations || []; }).catch(()=>{});
-    fetch('ideas.json').then(r => r.json()).then(d => { submittedIdeas = d.ideas || []; mergeLocalRegsAndIdeas(); $('mainPanel').style.display = 'block'; renderList(); }).catch(()=>{ mergeLocalRegsAndIdeas(); $('mainPanel').style.display = 'block'; renderList(); });
+    fetch('ideas.json').then(r => r.json()).then(d => { submittedIdeas = d.ideas || []; mergeLocalRegsAndIdeas(); $('cardLogin').style.display='none'; $('mainPanel').style.display = 'block'; renderList(); }).catch(()=>{ mergeLocalRegsAndIdeas(); $('cardLogin').style.display='none'; $('mainPanel').style.display = 'block'; renderList(); });
   }
 
   function mergeLocalRegsAndIdeas(){
@@ -337,9 +350,9 @@
   }
 
   function saveContentToGitHub(msg, targetMsgBox){
-    if(!token){ alert('برای ذخیره مستقیم روی سرور گیت‌هاب ابتدا توکن خود را بالای صفحه وارد کنید.'); return; } show(targetMsgBox,'info','در حال ذخیره روی مخزن گیت‌هاب...');
+    if(!token){ alert('برای ذخیره، ابتدا وارد پنل مدیریت شوید.'); return; } show(targetMsgBox,'info','در حال ذخیره تغییرات...');
     var body = { message: msg, content: b64EncodeUnicode(JSON.stringify(contentData, null, 2)) }; if(contentSha) body.sha = contentSha;
-    gh('content.json', { method: 'PUT', body: JSON.stringify(body) }).then(r=>r.json()).then(res=>{ contentSha = res.content ? res.content.sha : null; show(targetMsgBox,'ok','✅ تغییرات در گیت‌هاب منتشر شد!'); });
+    gh('content.json', { method: 'PUT', body: JSON.stringify(body) }).then(r=>r.json()).then(res=>{ contentSha = res.content ? res.content.sha : null; show(targetMsgBox,'ok','✅ تغییرات با موفقیت ذخیره شد!'); });
   }
 
   // Content tab logic
@@ -364,7 +377,7 @@
     var type = $('fType').value; var title = $('fTitle').value.trim(); var url = $('fUrl').value.trim(); var fileInput = $('fFile');
     if(!title){ alert('عنوان الزامی است.'); return; }
     if((type==='pdf'||type==='doc'||type==='archive'||type==='video') && fileInput.files && fileInput.files.length){
-      if(!token){ alert('توکن وارد نشده است.'); return; } var file = fileInput.files[0]; show('formMsg','info','در حال آپلود فایل...');
+      if(!token){ alert('لطفا ابتدا وارد پنل شوید.'); return; } var file = fileInput.files[0]; show('formMsg','info','در حال آپلود فایل...');
       var reader = new FileReader();
       reader.onload = function(e){
         var b64 = e.target.result.split(',')[1]; var filePath = 'files/' + Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9.\-_]/g,'_');
@@ -401,23 +414,97 @@
     renderScheduleList(); saveContentToGitHub('بروزرسانی تقویم کارگاه‌ها', 'scMsg'); $('btnScCancel').onclick();
   };
 
-  // Mentors tab
+  // Mentors tab - با پشتیبانی عکس
   function renderMentorsList(){
     var wrap = $('mentorsWrap'); wrap.innerHTML = ''; if(!contentData.mentors.length){ wrap.innerHTML='<p style="color:#888;">استادی نیست.</p>'; return; }
     contentData.mentors.forEach((m, idx) => {
       var div = document.createElement('div'); div.className = 'item' + (editMIndex === idx ? ' editing' : '');
-      div.innerHTML = `<div class="tic">👨‍🏫</div><div class="tinfo"><b>${m.name} (${m.role})</b><small>${m.edu}</small></div><div class="acts"><button class="btn sm gray" onclick="editM(${idx})">✏️</button><button class="btn sm danger" onclick="delM(${idx})">🗑</button></div>`;
+      var photoThumb = m.photo ? `<img src="${m.photo}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);">` : '👨‍🏫';
+      div.innerHTML = `<div class="tic" style="overflow:hidden;">${photoThumb}</div><div class="tinfo"><b>${m.name} (${m.role||''})</b><small>${m.edu||''}</small></div><div class="acts"><button class="btn sm gray" onclick="editM(${idx})">✏️</button><button class="btn sm danger" onclick="delM(${idx})">🗑</button></div>`;
       wrap.appendChild(div);
     });
   }
-  window.editM = function(idx){ editMIndex = idx; var m = contentData.mentors[idx]; $('mName').value = m.name; $('mRole').value = m.role; $('mEdu').value = m.edu; $('mDesc').value = m.desc; $('mFormTitle').textContent = '✏️ ویرایش استاد'; $('btnMCancel').style.display = 'inline-flex'; renderMentorsList(); };
+  window.clearMentorPhoto = function(){
+    $('mPhoto').value = '';
+    $('mPhotoFile').value = '';
+    $('mPhotoPreview').style.display = 'none';
+  };
+  // پیش‌نمایش عکس هنگام انتخاب فایل یا تایپ URL
+  if($('mPhotoFile')) $('mPhotoFile').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if(file){
+      var reader = new FileReader();
+      reader.onload = function(ev){
+        $('mPhotoPreviewImg').src = ev.target.result;
+        $('mPhotoPreview').style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+  if($('mPhoto')) $('mPhoto').addEventListener('input', function(){
+    var url = this.value.trim();
+    if(url){ $('mPhotoPreviewImg').src = url; $('mPhotoPreview').style.display='block'; }
+    else { $('mPhotoPreview').style.display='none'; }
+  });
+
+  window.editM = function(idx){ 
+    editMIndex = idx; var m = contentData.mentors[idx]; 
+    $('mName').value = m.name||''; 
+    $('mRole').value = m.role||''; 
+    $('mEdu').value = m.edu||''; 
+    $('mDesc').value = m.desc||''; 
+    $('mPhoto').value = m.photo||'';
+    if(m.photo){ $('mPhotoPreviewImg').src = m.photo; $('mPhotoPreview').style.display='block'; } else { $('mPhotoPreview').style.display='none'; }
+    $('mPhotoFile').value = '';
+    $('mFormTitle').textContent = '✏️ ویرایش استاد'; 
+    $('btnMCancel').style.display = 'inline-flex'; 
+    renderMentorsList(); 
+    window.scrollTo({top: $('mFormTitle').offsetTop - 80, behavior:'smooth'});
+  };
   window.delM = function(idx){ if(confirm('حذف شود؟')){ contentData.mentors.splice(idx,1); renderMentorsList(); saveContentToGitHub('حذف استاد', 'mMsg'); } };
-  $('btnMCancel').onclick = function(){ editMIndex = -1; $('mName').value=''; $('mRole').value=''; $('mEdu').value=''; $('mDesc').value=''; $('mFormTitle').textContent = '➕ معرفی استاد'; $('btnMCancel').style.display='none'; renderMentorsList(); };
+  $('btnMCancel').onclick = function(){ 
+    editMIndex = -1; 
+    $('mName').value=''; $('mRole').value=''; $('mEdu').value=''; $('mDesc').value=''; $('mPhoto').value='';
+    $('mPhotoFile').value=''; $('mPhotoPreview').style.display='none';
+    $('mFormTitle').textContent = '➕ معرفی استاد'; $('btnMCancel').style.display='none'; renderMentorsList(); 
+  };
   $('btnMSubmit').onclick = function(){
     if(!$('mName').value.trim()){ alert('نام استاد الزامی است.'); return; }
-    var obj = { name: $('mName').value.trim(), role: $('mRole').value.trim(), edu: $('mEdu').value.trim(), desc: $('mDesc').value.trim() };
-    if(editMIndex>=0) contentData.mentors[editMIndex] = obj; else contentData.mentors.push(obj);
-    renderMentorsList(); saveContentToGitHub('بروزرسانی اساتید', 'mMsg'); $('btnMCancel').onclick();
+    var photoFileInput = $('mPhotoFile');
+    var photoUrl = $('mPhoto').value.trim();
+    
+    function saveMentor(finalPhotoUrl){
+      var obj = { 
+        name: $('mName').value.trim(), 
+        role: $('mRole').value.trim(), 
+        edu: $('mEdu').value.trim(), 
+        desc: $('mDesc').value.trim(),
+        photo: finalPhotoUrl || ''
+      };
+      if(editMIndex>=0) contentData.mentors[editMIndex] = obj; else contentData.mentors.push(obj);
+      renderMentorsList(); saveContentToGitHub('بروزرسانی اساتید', 'mMsg'); $('btnMCancel').onclick();
+    }
+
+    // اگر فایل عکس انتخاب شده، اول آپلود کن
+    if(photoFileInput.files && photoFileInput.files.length){
+      if(!token){ alert('برای آپلود عکس ابتدا وارد پنل شوید.'); return; }
+      var file = photoFileInput.files[0];
+      show('mMsg','info','در حال آپلود عکس استاد...');
+      var reader = new FileReader();
+      reader.onload = function(e){
+        var b64 = e.target.result.split(',')[1];
+        var filePath = 'files/mentors/' + Date.now() + '-' + file.name.replace(/[^a-zA-Z0-9.\-_]/g,'_');
+        gh(filePath, { method: 'PUT', body: JSON.stringify({ message: 'آپلود عکس استاد: ' + $('mName').value.trim(), content: b64 }) })
+        .then(r=>r.json()).then(res=>{
+          saveMentor(filePath);
+        }).catch(err => {
+          show('mMsg','err','خطا در آپلود عکس: ' + err.message);
+        });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      saveMentor(photoUrl);
+    }
   };
 
   // Stars tab
@@ -460,9 +547,9 @@
   $('regSearchInput').oninput = renderRegsTable;
   window.delReg = function(idx){ if(confirm('حذف شود؟')){ registrations.splice(idx,1); localStorage.setItem('dehgolansrc_local_regs', JSON.stringify(registrations)); renderRegsTable(); populateSchoolFilter(); } };
   window.saveRegsToGitHub = function(){
-    if(!token){ alert('توکن وارد نشده است.'); return; } show('regMsg','info','در حال ذخیره روی گیت‌هاب...');
+    if(!token){ alert('لطفا ابتدا وارد پنل شوید.'); return; } show('regMsg','info','در حال ذخیره...');
     var body = { message: 'بروزرسانی ثبت‌نام‌کنندگان', content: b64EncodeUnicode(JSON.stringify({registrations:registrations}, null, 2)) }; if(regsSha) body.sha = regsSha;
-    gh('registrations.json', { method: 'PUT', body: JSON.stringify(body) }).then(r=>r.json()).then(res=>{ regsSha = res.content ? res.content.sha : null; show('regMsg','ok','✅ اطلاعات دانش‌آموزان روی گیت‌هاب ذخیره شد!'); });
+    gh('registrations.json', { method: 'PUT', body: JSON.stringify(body) }).then(r=>r.json()).then(res=>{ regsSha = res.content ? res.content.sha : null; show('regMsg','ok','✅ اطلاعات دانش‌آموزان ذخیره شد!'); });
   };
   window.exportToExcel = function(){
     if(!registrations.length){ alert('اطلاعاتی نیست.'); return; } var csv = "\uFEFFکد رهگیری,نام و خانوادگی,کد ملی,شماره شاد,نام مدرسه,پایه,رشته,انجمن,تاریخ\r\n";
@@ -488,9 +575,9 @@
   }
   window.delIdea = function(idx){ if(confirm('آیا از حذف این ایده پژوهشی اطمینان دارید؟')){ submittedIdeas.splice(idx,1); localStorage.setItem('dehgolansrc_ideas', JSON.stringify(submittedIdeas)); renderIdeasTable(); } };
   window.saveIdeasToGitHub = function(){
-    if(!token){ alert('توکن وارد نشده است.'); return; } show('ideaMsg','info','در حال ذخیره ایده‌ها روی مخزن گیت‌هاب...');
+    if(!token){ alert('لطفا ابتدا وارد پنل شوید.'); return; } show('ideaMsg','info','در حال ذخیره ایده‌ها...');
     var body = { message: 'بروزرسانی ایده‌ها و اختراعات ارسالی', content: b64EncodeUnicode(JSON.stringify({ideas:submittedIdeas}, null, 2)) }; if(ideasSha) body.sha = ideasSha;
-    gh('ideas.json', { method: 'PUT', body: JSON.stringify(body) }).then(r=>r.json()).then(res=>{ ideasSha = res.content ? res.content.sha : null; show('ideaMsg','ok','✅ صندوق ایده‌ها روی گیت‌هاب ذخیره شد!'); });
+    gh('ideas.json', { method: 'PUT', body: JSON.stringify(body) }).then(r=>r.json()).then(res=>{ ideasSha = res.content ? res.content.sha : null; show('ideaMsg','ok','✅ صندوق ایده‌ها ذخیره شد!'); });
   };
   window.exportIdeasWord = function(){
     if(!submittedIdeas.length){ alert('ایده‌ای نیست.'); return; }
@@ -501,7 +588,5 @@
   };
 })();
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
